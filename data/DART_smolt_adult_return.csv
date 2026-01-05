@@ -1,0 +1,34 @@
+year,meanSAR,lowerCI,upperCI,meanJuvArrivalDay,juvCount,medianJuvArrivalDay,SE,juvMinArrivalDay,juvMaxArrivalDate,adultCount,juv5%ArrivalDay,juv95%ArrivalDay,ocean0Count,ocean1Count,ocean2Count,ocean3Count,juvLoc,adultLoc,reachName,srrtName
+2002,1.820512821,1.578259136,2.062766505,146,11700,147,0.123598819,110,213,213,131,164,14,30,155,14,Bonneville,Bonneville,Bonneville (All) to Bonneville Adult,PIT-Tagged Snake River Spring/Summer Chinook ESU (All)
+2003,0.889103315,0.736355802,1.041850828,142,14509,142,0.077932405,91,197,129,125,160,13,34,65,17,Bonneville,Bonneville,Bonneville (All) to Bonneville Adult,PIT-Tagged Snake River Spring/Summer Chinook ESU (All)
+2004,0.674346727,0.405463062,0.943230392,141,3559,140,0.137185543,112,192,24,127,164,0,1,17,6,Bonneville,Bonneville,Bonneville (All) to Bonneville Adult,PIT-Tagged Snake River Spring/Summer Chinook ESU (All)
+2005,0.362116992,0.165624688,0.558609295,142,3590,140,0.100251175,119,211,13,133,160,0,1,9,3,Bonneville,Bonneville,Bonneville (All) to Bonneville Adult,PIT-Tagged Snake River Spring/Summer Chinook ESU (All)
+2006,2.474261043,2.081916082,2.866606004,136,6022,135,0.200176001,110,196,149,124,153,51,15,70,13,Bonneville,Bonneville,Bonneville (All) to Bonneville Adult,PIT-Tagged Snake River Spring/Summer Chinook ESU (All)
+2007,2.048473786,1.768887155,2.328060417,135,9861,134,0.14264624,116,219,202,125,150,29,53,112,8,Bonneville,Bonneville,Bonneville (All) to Bonneville Adult,PIT-Tagged Snake River Spring/Summer Chinook ESU (All)
+2008,6.860525858,6.206744915,7.5143068,145,5743,142,0.333561705,119,208,394,132,170,124,97,150,23,Bonneville,Bonneville,Bonneville (All) to Bonneville Adult,PIT-Tagged Snake River Spring/Summer Chinook ESU (All)
+2009,3.290712657,2.942606999,3.638818316,140,10089,140,0.177604928,113,198,332,127,154,101,29,173,29,Bonneville,Bonneville,Bonneville (All) to Bonneville Adult,PIT-Tagged Snake River Spring/Summer Chinook ESU (All)
+2010,2.233452886,2.019948355,2.446957416,140,18402,142,0.108930883,113,203,411,127,155,89,123,175,24,Bonneville,Bonneville,Bonneville (All) to Bonneville Adult,PIT-Tagged Snake River Spring/Summer Chinook ESU (All)
+2011,1.177822465,0.819419836,1.536225093,132,3481,131,0.182858484,108,210,41,120,152,16,4,19,2,Bonneville,Bonneville,Bonneville (All) to Bonneville Adult,PIT-Tagged Snake River Spring/Summer Chinook ESU (All)
+2012,2.38838085,2.077972123,2.698789577,137,9295,136,0.1583718,111,208,222,124,156,58,43,115,6,Bonneville,Bonneville,Bonneville (All) to Bonneville Adult,PIT-Tagged Snake River Spring/Summer Chinook ESU (All)
+2013,2.859103385,2.50978859,3.20841818,137,8744,136,0.178221834,111,209,250,127,157,59,54,118,19,Bonneville,Bonneville,Bonneville (All) to Bonneville Adult,PIT-Tagged Snake River Spring/Summer Chinook ESU (All)
+2014,0.929965557,0.728383634,1.131547479,136,8710,136,0.10284792,111,271,81,121,155,13,18,41,9,Bonneville,Bonneville,Bonneville (All) to Bonneville Adult,PIT-Tagged Snake River Spring/Summer Chinook ESU (All)
+2015,0.539603006,0.398654164,0.680551849,136,10378,137,0.071912675,111,183,56,124,147,11,11,31,3,Bonneville,Bonneville,Bonneville (All) to Bonneville Adult,PIT-Tagged Snake River Spring/Summer Chinook ESU (All)
+2016,1.179996254,0.975175547,1.384816961,130,10678,130,0.104500361,108,182,126,118,144,40,31,53,2,Bonneville,Bonneville,Bonneville (All) to Bonneville Adult,PIT-Tagged Snake River Spring/Summer Chinook ESU (All)
+2017,0.758725341,0.549216755,0.968233927,132,6590,132,0.106892136,99,194,50,117,150,17,9,21,3,Bonneville,Bonneville,Bonneville (All) to Bonneville Adult,PIT-Tagged Snake River Spring/Summer Chinook ESU (All)
+2018,0.915213262,0.669943545,1.160482979,134,5791,134,0.125137611,108,197,53,118,153,16,6,31,0,Bonneville,Bonneville,Bonneville (All) to Bonneville Adult,PIT-Tagged Snake River Spring/Summer Chinook ESU (All)
+2019,1.04610616,0.819482231,1.27273009,138,7743,140,0.115624454,107,197,81,123,153,15,6,53,7,Bonneville,Bonneville,Bonneville (All) to Bonneville Adult,PIT-Tagged Snake River Spring/Summer Chinook ESU (All)
+2020,2.627769736,2.296939698,2.958599774,140,8981,141,0.168790836,107,201,236,124,156,90,21,115,10,Bonneville,Bonneville,Bonneville (All) to Bonneville Adult,PIT-Tagged Snake River Spring/Summer Chinook ESU (All)
+2021,1.678723799,1.436219308,1.921228289,140,10782,140,0.123726781,106,185,181,130,152,29,47,97,8,Bonneville,Bonneville,Bonneville (All) to Bonneville Adult,PIT-Tagged Snake River Spring/Summer Chinook ESU (All)
+2022,1.068766699,0.829766149,1.30776725,142,7111,143,0.121939056,119,202,76,129,157,22,13,38,3,Bonneville,Bonneville,Bonneville (All) to Bonneville Adult,PIT-Tagged Snake River Spring/Summer Chinook ESU (All)
+2023,1.131824234,0.913418903,1.350229565,140,9012,140,0.111431291,120,193,102,128,152,36,27,39,NA,Bonneville,Bonneville,Bonneville (All) to Bonneville Adult,PIT-Tagged Snake River Spring/Summer Chinook ESU (All)
+2024,0.167980359,0.076741924,0.259218795,137,7739,140,0.046550222,109,221,13,120,145,8,5,NA,NA,Bonneville,Bonneville,Bonneville (All) to Bonneville Adult,PIT-Tagged Snake River Spring/Summer Chinook ESU (All)
+2025,NA,NA,NA,131,3960,133,NA,108,144,0,117,142,0,NA,NA,NA,Bonneville,Bonneville,Bonneville (All) to Bonneville Adult,PIT-Tagged Snake River Spring/Summer Chinook ESU (All)
+Notes:,,,,,,,,,,,,,,,,,,,,
+Columbia River DART,,,,,,,,,,,,,,,,,,,,
+Smolt-to-Adult Return (SAR) Survival Bonneville (Juvenile) to Bonneville (Adult),,,,,,,,,,,,,,,,,,,,
+PIT-Tagged Snake River Spring/Summer Chinook ESU (All),,,,,,,,,,,,,,,,,,,,
+All Adult Detections Included,,,,,,,,,,,,,,,,,,,,
+As of 2024-03-22; a minimum requirement of 7 adults detected within each pooled period for SAR Survival calculations has been introduced.,,,,,,,,,,,,,,,,,,,,
+Generated 27 May 2025 10:12:24 PDT. DART PIT Tag Smolt-to-Adult Return (SAR) Survival www.cbr.washington.edu/dart/query/pit_sar_esu.,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,
+"DART Data Citation. Columbia River DART, Columbia Basin Research, University of Washington. (2025). PIT Tag Smolt-to-Adult Return (SAR) Survival. Available from https://www.cbr.washington.edu/dart/query/pit_sar_esu.",,,,,,,,,,,,,,,,,,,,
