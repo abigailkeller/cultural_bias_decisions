@@ -4,7 +4,7 @@ library(ggnewscale)
 library(MCMCvis)
 library(viridis)
 
-source("final_code/code/timeseries_functions.R")
+source("code/timeseries_functions.R")
 
 #######################
 # prepare gastro data #
@@ -41,7 +41,7 @@ data_gastro_sub <- left_join(data_gastro_sub, dates_df, by = "Date")
 
 # get posterior summaries
 posterior <- do.call(rbind, 
-                     readRDS("final_code/posterior_samples/MSFR_posterior_1day.rds"))
+                     readRDS("posterior_samples/MSFR_posterior_1day.rds"))
 posterior_sub <- posterior[, c(1:46, 93:138)]
 propN_L <- matrix(NA, nrow = nrow(posterior_sub), 
                   ncol = ncol(posterior_sub) / 2)
@@ -182,7 +182,7 @@ datadens_S <- ggplot(data_density_S) +
         axis.text = element_blank(),
         legend.title = element_text(hjust = 0.5))
 
-ggsave("final_code/figures/data_density.svg", datadens_L + datadens_S,
+ggsave("figures/data_density.svg", datadens_L + datadens_S,
        dpi = 400, width = 6, height = 3)
 
 # plot without MSFR fit
@@ -238,13 +238,13 @@ final_nofit <-
     caption = "estimated proportion of species in prey community"
   )
 
-# ggsave("final_code/figures/MSFR_nofit.png", final_nofit, 
+# ggsave("figures/MSFR_nofit.png", final_nofit, 
 #        dpi = 400, height = 4, width = 8)
-ggsave("final_code/figures/MSFR_nofit.svg", final_nofit, 
+ggsave("figures/MSFR_nofit.svg", final_nofit, 
        dpi = 400, height = 4, width = 8)
 
 # plot MSFR fit with posterior subset highlighted
-sub <- readRDS("final_code/posterior_samples/index_sub.rds")
+sub <- readRDS("posterior_samples/index_sub.rds")
 
 prey_L_ordered <- prey_L %>%
   filter(id %in% sub) %>%
@@ -325,9 +325,8 @@ final_plot_sub <-
     ),
     caption = "estimated proportion of species in prey community"
   )
-# ggsave("final_code/figures/MSFR_fit_sub.png", final_plot_sub,
-#        dpi = 400, height = 4, width = 8)
-ggsave("final_code/figures/MSFR_fit_sub.svg", final_plot_sub,
+
+ggsave("figures/MSFR_fit_sub.svg", final_plot_sub,
        dpi = 400, height = 4, width = 8)
 
 

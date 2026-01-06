@@ -6,6 +6,7 @@ bibliography: lamprey_refs.bib
 
 ```{r, echo = FALSE, warning = FALSE, message = FALSE}
 library(tidyverse)
+library(dplyr)
 library(patchwork)
 library(bayestestR)
 library(MCMCvis)
@@ -482,20 +483,12 @@ knitr::kable(
 
 ```{r, echo = FALSE, message = FALSE, warning=FALSE}
 # read in data
-gastro <- readRDS("../../data/model_data/gastro_data.rds")
-
-# get just CSL
-gastro_CSL <- gastro[gastro$Pinniped_species == "CSL", ]
+gastro_CSL <- readRDS("../data/model_data/gastro_data.rds")
 
 # sort by date
 gastro_CSL <- gastro_CSL[order(as.Date(gastro_CSL$Date, format = "%d/%m/%Y")), ]
 
-# get unique dates
-dates_df <- data.frame(Date = as.Date(unique(gastro_CSL$Date)),
-                       d_unq = 1:length(unique(gastro_CSL$Date)))
-
 # add unique dates to gastro data
-gastro_CSL <- left_join(gastro_CSL, dates_df, by = "Date")
 gastro_CSL <- gastro_CSL %>% 
   group_by(Date, d_unq) %>% 
   summarise(n = n())

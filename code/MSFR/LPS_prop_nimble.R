@@ -5,8 +5,8 @@ library(viridis)
 library(tidyverse)
 
 # read in data
-C_V <- readRDS("final_code/data/model_data/C_V.rds")
-C_T <- readRDS("final_code/data/model_data/C_T.rds")
+C_V <- readRDS("data/model_data/C_V.rds")
+C_T <- readRDS("data/model_data/C_T.rds")
 
 # calculate proportion
 LPS_prop <- C_V / C_T
@@ -92,4 +92,4 @@ out_sub <- list(
   out[[1]][sequence, ], out[[2]][sequence, ],
   out[[3]][sequence, ], out[[4]][sequence, ]
 )
-saveRDS(out_sub, "final_code/posterior_samples/LPS_posterior.rds")
+saveRDS(out_sub, "posterior_samples/LPS_posterior.rds")

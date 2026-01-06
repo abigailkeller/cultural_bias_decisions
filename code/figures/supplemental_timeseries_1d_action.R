@@ -1,14 +1,14 @@
 library(tidyverse)
 library(patchwork)
 
-source("final_code/code/timeseries_functions.R")
+source("code/timeseries_functions.R")
 
 # read in MSFR posterior
 samples <- do.call(rbind, 
-                   readRDS("final_code/posterior_samples/MSFR_posterior_1day.rds"))
+                   readRDS("posterior_samples/MSFR_posterior_1day.rds"))
 set.seed(123)
 index <- sample(nrow(samples), 1000)
-sub <- readRDS("final_code/posterior_samples/index_sub.rds")
+sub <- readRDS("posterior_samples/index_sub.rds")
 posterior <- samples[index[sub], ]
 
 #################
@@ -141,6 +141,6 @@ plot <- ggplot() +
   theme_minimal(base_family = "Arial") + 
   theme(strip.text = element_blank(), 
         legend.title = element_text(hjust = 0.5)) 
-ggsave("final_code/figures/supplemental/timeseries_equilibria.png",
+ggsave("figures/supplemental/timeseries_equilibria.png",
        plot, dpi = 400, height = 6, width = 4.5, bg = "white")
 

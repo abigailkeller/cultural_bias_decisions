@@ -46,7 +46,7 @@ para_plot <- ggplot(data = para_data) +
   scale_linetype_manual(values = c("dotted", "dashed", "solid"),
                         labels = c("9e7", "5e6", "3e6")) +
   theme_minimal(base_family = "Arial")
-ggsave("final_code/figures/parasitism.svg",
+ggsave("figures/parasitism.svg",
        para_plot, dpi = 400, height = 3, width = 5)
 
 

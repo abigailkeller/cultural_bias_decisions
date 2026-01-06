@@ -7,7 +7,7 @@ library(ggtext)
 library(viridis)
 
 # read in utility
-utility <- readRDS("final_code/VOI/utility_fullposterior.rds")
+utility <- readRDS("VOI/utility_fullposterior.rds")
 
 # actions
 alpha_change <- seq(250 * 0.9 * 0.05, 250 * 0.9 * 0.45, 0.5)
@@ -90,6 +90,6 @@ evpi_expect <- ggplot() +
         element_text(size = 11))
 
 
-ggsave("final_code/figures/supplemental/evpi_fullposterior.svg", evpi_expect, 
+ggsave("figures/supplemental/evpi_fullposterior.svg", evpi_expect, 
        dpi = 400, height = 4, width = 4, bg = "white")
 

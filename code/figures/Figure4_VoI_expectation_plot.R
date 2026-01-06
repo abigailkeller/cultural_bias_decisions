@@ -6,13 +6,13 @@ library(grid)
 library(ggtext)
 
 # read in utility
-utility <- readRDS("final_code/VOI/utility_fullposterior.rds")
+utility <- readRDS("VOI/utility_fullposterior.rds")
 
 # actions
 alpha_change <- seq(250 * 0.9 * 0.05, 250 * 0.9 * 0.45, 0.5)
 
 # posterior subset
-sub <- readRDS("final_code/posterior_samples/index_sub.rds")
+sub <- readRDS("posterior_samples/index_sub.rds")
 
 ###############
 # expectation #
@@ -124,15 +124,6 @@ violin_expect <- ggplot() +
     arrow = arrow(length = unit(0.2, "cm")),
     color = "#662d91"
   ) +
-  # stat_brace(
-  #   aes(x = c(2, 2),
-  #       y = c(mean(evpi), bethedge_utility)),
-  #   rotate = 90,
-  #   outside = TRUE,
-  #   width = 0.1,
-  #   outerstart = 1.52,
-  #   color = "purple3"
-  # ) + 
   labs(x = "", 
        y = "maximized expected utility*") +
   theme_minimal() +
@@ -144,6 +135,6 @@ violin_expect <- ggplot() +
 
 final_VOI_plot <- evpi_expect + violin_expect
 
-ggsave("final_code/figures/Figure4_evpi.svg", final_VOI_plot, dpi = 400,
+ggsave("figures/Figure4_evpi.svg", final_VOI_plot, dpi = 400,
        height = 4.5, width = 9, bg = "white")
 

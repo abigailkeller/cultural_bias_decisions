@@ -4,7 +4,7 @@ library(ggnewscale)
 library(MCMCvis)
 library(viridis)
 
-source("final_code/code/timeseries_functions.R")
+source("code/timeseries_functions.R")
 
 #######################
 # prepare gastro data #
@@ -41,7 +41,7 @@ data_gastro_sub <- left_join(data_gastro_sub, dates_df, by = "Date")
 
 # get posterior summaries
 posterior <- do.call(rbind, 
-                     readRDS("final_code/posterior_samples/MSFR_posterior_1day.rds"))
+                     readRDS("posterior_samples/MSFR_posterior_1day.rds"))
 posterior_sub <- posterior[, c(1:46, 93:138)]
 propN_L <- matrix(NA, nrow = nrow(posterior_sub), 
                   ncol = ncol(posterior_sub) / 2)
@@ -148,8 +148,7 @@ plot_nofit_errorbars_L <- ggplot() +
   ggtitle("Pacific lamprey") + 
   scale_x_continuous(limits = c(0, 1)) +
   labs(x = NULL,
-       y = expression("proportion of species " * italic(i) * 
-                        " in predator diet")) +
+       y = "proportion of species in predator diet") +
   theme_minimal(base_family = "Arial")
 plot_nofit_errorbars_S <- ggplot() +
   geom_errorbarh(data = data[data$Fish_species == "C", ],
@@ -170,10 +169,9 @@ final_nofit_errorbars <-
       plot.caption = element_text(hjust = 0.5, family = "Arial",
                                   size = 11)
     ),
-    caption = expression("estimated proportion of species " * italic(i) * 
-                           " in prey community")
+    caption = "estimated proportion of species in prey community"
   )
-ggsave("final_code/figures/supplemental/MSFR_nofit_error.png", 
+ggsave("figures/supplemental/MSFR_nofit_error.png", 
        final_nofit_errorbars, 
        dpi = 400, height = 4, width = 8)
 
@@ -187,8 +185,7 @@ plot_L <- ggplot() +
               aes(x = propNmean, y = propC), alpha = 0.5, size = 3) +
   ggtitle("Pacific lamprey") + 
   labs(x = NULL,
-       y = expression("proportion of species " * italic(i) * 
-                        " in predator diet")) +
+       y = "proportion of species in predator diet") +
   theme_minimal(base_family = "Arial") +
   theme(legend.position = "None")
 
@@ -212,10 +209,9 @@ final_plot <-
       plot.caption = element_text(hjust = 0.5, family = "Arial",
                                   size = 11)
     ),
-    caption = expression("estimated proportion of species " * italic(i) * 
-                           " in prey community")
+    caption = "estimated proportion of species in prey community"
   )
-ggsave("final_code/figures/supplemental/MSFR_fit.png", final_plot,
+ggsave("figures/supplemental/MSFR_fit.png", final_plot,
        dpi = 400, height = 4, width = 8)
 
 # plot MSFR fit, with full posterior colored
@@ -223,7 +219,6 @@ L_0.5 <- prey_L[prey_L$x == 0.5, c("id", "y")]
 colnames(L_0.5) <- c("id", "color")
 prey_L <- left_join(prey_L, L_0.5, by = "id")
 prey_S <- left_join(prey_S, L_0.5, by = "id")
-# saveRDS(L_0.5, "final_code/VOI/index_color.rds")
 
 plot_L_color <- ggplot() +
   geom_line(data = prey_L,
@@ -235,8 +230,7 @@ plot_L_color <- ggplot() +
               aes(x = propNmean, y = propC), alpha = 0.5, size = 3) +
   ggtitle("Pacific lamprey") + 
   labs(x = NULL,
-       y = expression("proportion of species " * italic(i) * 
-                        " in predator diet")) +
+       y = "proportion of species in predator diet") +
   theme_minimal(base_family = "Arial") +
   theme(legend.position = "None")
 
@@ -260,10 +254,9 @@ final_plot_color <-
       plot.caption = element_text(hjust = 0.5, family = "Arial",
                                   size = 11)
     ),
-    caption = expression("estimated proportion of species " * italic(i) * 
-                           " in prey community")
+    caption = "estimated proportion of species in prey community"
   )
-ggsave("final_code/figures/supplemental/MSFR_fit_fullposterior.svg", 
+ggsave("figures/supplemental/MSFR_fit_fullpost.svg", 
        final_plot_color,
        dpi = 400, height = 4, width = 8)
 

@@ -5,16 +5,16 @@ library(tidyverse)
 ############
 
 file_list_LPS <- c(
-  "final_code/data/Bonneville_dam_LPS/WA_AWS_2017.csv",
-  "final_code/data/Bonneville_dam_LPS/WA_AWS_2019.csv",
-  "final_code/data/Bonneville_dam_LPS/BI_AWS_2017.csv",
-  "final_code/data/Bonneville_dam_LPS/BI_AWS_2019.csv",
-  "final_code/data/Bonneville_dam_LPS/CI_ENT_2017.csv",
-  "final_code/data/Bonneville_dam_LPS/CI_ENT_2019.csv",
-  "final_code/data/Bonneville_dam_LPS/BradfordIsland_2017.csv",
-  "final_code/data/Bonneville_dam_LPS/BradfordIsland_2019.csv",
-  "final_code/data/Bonneville_dam_LPS/WashingtonShore_2017.csv",
-  "final_code/data/Bonneville_dam_LPS/WashingtonShore_2019.csv"
+  "data/Bonneville_dam_LPS/WA_AWS_2017.csv",
+  "data/Bonneville_dam_LPS/WA_AWS_2019.csv",
+  "data/Bonneville_dam_LPS/BI_AWS_2017.csv",
+  "data/Bonneville_dam_LPS/BI_AWS_2019.csv",
+  "data/Bonneville_dam_LPS/CI_ENT_2017.csv",
+  "data/Bonneville_dam_LPS/CI_ENT_2019.csv",
+  "data/Bonneville_dam_LPS/BradfordIsland_2017.csv",
+  "data/Bonneville_dam_LPS/BradfordIsland_2019.csv",
+  "data/Bonneville_dam_LPS/WashingtonShore_2017.csv",
+  "data/Bonneville_dam_LPS/WashingtonShore_2019.csv"
 )
 
 # read all CSV files into a combined df
@@ -78,8 +78,8 @@ data_LPS_2019 <- combined_data_LPS %>%
 
 # get adult passage data
 file_list_adult_passage <- c(
-  "final_code/data/Bonneville_dam_returns/adultdaily_2017.csv",
-  "final_code/data/Bonneville_dam_returns/adultdaily_2019.csv"
+  "data/Bonneville_dam_returns/adultdaily_2017.csv",
+  "data/Bonneville_dam_returns/adultdaily_2019.csv"
 )
 
 # read all CSV files into a combined df
@@ -145,8 +145,8 @@ total_lamprey <- rbind(data_LPS_2017[, c("Date", "total")],
 
 # save as model data
 saveRDS(interval_prop$Lmpry,
-        "final_code/data/model_data/C_V.rds")
+        "data/model_data/C_V.rds")
 saveRDS(interval_prop$total,
-        "final_code/data/model_data/C_T.rds")
+        "data/model_data/C_T.rds")
 saveRDS(total_lamprey,
-        "final_code/data/model_data/total_lamprey.rds")
+        "data/model_data/total_lamprey.rds")

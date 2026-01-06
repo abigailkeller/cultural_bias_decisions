@@ -2,7 +2,7 @@ library(tidyverse)
 library(patchwork)
 
 # read in bonneville dam data
-file_list <- list.files(path = "final_code/data/Bonneville_dam_returns", 
+file_list <- list.files(path = "data/Bonneville_dam_returns", 
                         pattern = "adultdaily_", full.names = TRUE)
 
 # read all CSV files into a combined df
@@ -156,11 +156,7 @@ later_noshad <- ggplot(data = data_later[data_later$species != "Sh", ]) +
 
 
 # combine
-shad_plot <- early_all + later_all + plot_layout(ncol = 1)
-# ggsave("figures/synchrony_shad.png", shad_plot, dpi = 400,
-#        width = 5, height = 6)
-
 noshad_plot <- early_noshad + later_noshad + plot_layout(ncol = 1)
-ggsave("final_code/figures/supplemental/migration.png", 
+ggsave("figures/supplemental/migration.png", 
        noshad_plot, dpi = 400,
        width = 5, height = 6)

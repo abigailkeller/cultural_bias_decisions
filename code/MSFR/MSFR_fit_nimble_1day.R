@@ -9,21 +9,21 @@ library(tidyverse)
 ################
 
 # read in gastrointestinal data
-gastro_CSL <- readRDS("final_code/data/model_data/gastro_data.rds")
+gastro_CSL <- readRDS("data/model_data/gastro_data.rds")
 
 # read in lamprey count data from years (2017, 2019) with LPS and night-time count
-total_lamprey <- readRDS("final_code/data/model_data/total_lamprey.rds")
+total_lamprey <- readRDS("data/model_data/total_lamprey.rds")
 
 # read in bonneville dam visual count data
 bonneville <- readRDS("data/model_data/bonneville_visualcount.rds")
 
 # read in lamprey visual count passage proportion posterior summary
 LPS_passage_posterior <- MCMCsummary(
-  readRDS("final_code/posterior_samples/LPS_posterior.rds")
+  readRDS("posterior_samples/LPS_posterior.rds")
 )
 
 # read in unique dates
-dates_df <- readRDS("final_code/data/model_data/unique_dates.rds")
+dates_df <- readRDS("data/model_data/unique_dates.rds")
 
 # add time window to unique dates
 dates_df <- dates_df %>% 
@@ -291,4 +291,4 @@ out_sub <- list(
 )
 
 # save samples
-saveRDS(out_sub, "final_code/posterior_samples/MSFR_posterior_1day.rds")
+saveRDS(out_sub, "posterior_samples/MSFR_posterior_1day.rds")

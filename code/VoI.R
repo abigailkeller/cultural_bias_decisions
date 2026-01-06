@@ -4,11 +4,11 @@ library(ggnewscale)
 library(ggbrace)
 library(grid)
 
-source("final_code/code/timeseries_functions.R")
+source("code/timeseries_functions.R")
 
 # read in MSFR posterior
 posterior <- do.call(rbind, 
-                     readRDS("final_code/posterior_samples/MSFR_posterior_1day.rds"))
+                     readRDS("posterior_samples/MSFR_posterior_1day.rds"))
 
 # randomly select 1000 samples
 set.seed(123)
@@ -89,4 +89,4 @@ for (a in seq_along(alpha_change)) {
 }
 
 # save utility
-saveRDS(utility, "final_code/VOI/utility_fullposterior.rds")
+saveRDS(utility, "VOI/utility_fullposterior.rds")

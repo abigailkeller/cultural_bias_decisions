@@ -1,14 +1,14 @@
 library(tidyverse)
 library(viridis)
 
-source("final_code/code/timeseries_functions.R")
+source("code/timeseries_functions.R")
 
 # read in utility
-utility <- readRDS("final_code/VOI/utility_fullposterior.rds")
+utility <- readRDS("VOI/utility_fullposterior.rds")
 
 # get posterior
 posterior <- do.call(rbind, 
-                     readRDS("final_code/posterior_samples/MSFR_posterior_1day.rds"))
+                     readRDS("posterior_samples/MSFR_posterior_1day.rds"))
 set.seed(123)
 index <- sample(nrow(posterior), 1000)
 posterior <- posterior[index, ]
@@ -110,4 +110,4 @@ ggplot(data = utility_long[utility_long$id %in% sub, ]) +
   geom_line(aes(x = alpha_change, y = utility, color = y, group = id)) +
   scale_color_viridis()
 
-saveRDS(sub, "final_code/posterior_samples/index_sub.rds")
+saveRDS(sub, "posterior_samples/index_sub.rds")
