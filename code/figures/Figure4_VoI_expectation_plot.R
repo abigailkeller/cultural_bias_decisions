@@ -57,8 +57,8 @@ evpi_expect <- ggplot() +
   geom_line(aes(x = alpha_change, y = rowMeans(utility))) +
   geom_line(data = evpi_sub, aes(x = alpha_change, y = evpi,
                                   color = as.factor(sample))) +
-  scale_color_manual(values = c("cornflowerblue", "green4", 
-                                "goldenrod", "coral3"),
+  scale_color_manual(values = c("cornflowerblue", "#009E73", 
+                                "goldenrod", "#D55E00"),
                      labels = c("1", "2", "3", "4")) +
   ggtitle("A.") +
   labs(x = "action (lamprey production)", 
@@ -71,8 +71,8 @@ evpi_expect <- ggplot() +
   geom_point(data = actions,
              aes(x = action, y = utility, color = sample),
              show.legend = FALSE, size = 3) +
-  scale_color_manual(values = c("black", "cornflowerblue", "green4", 
-                                "goldenrod", "coral3"),
+  scale_color_manual(values = c("black", "cornflowerblue", "#009E73", 
+                                "goldenrod", "#D55E00"),
                      labels = c("bet", "1", "2", "3", "4")) +
   scale_y_continuous(limits = c(min(evpi), max(evpi))) +
   scale_x_continuous(breaks = c(250 * 0.9 * 0.15, 
@@ -94,8 +94,8 @@ violin_expect <- ggplot() +
   geom_point(aes(x = rep(1, length(actions$utility)),
                  y = actions$utility, color = as.factor(actions$sample)),
              size = 3) +
-  scale_color_manual(values = c("black", "cornflowerblue", "green4", 
-                                "goldenrod", "coral3"),
+  scale_color_manual(values = c("black", "cornflowerblue", "#009E73", 
+                                "goldenrod", "#D55E00"),
                      labels = c("bet", "1", "2", "3", "4")) +
   scale_y_continuous(limits = c(min(evpi), max(evpi))) +
   geom_segment(aes(x = 0.5, xend = 1.5, y = mean(evpi),

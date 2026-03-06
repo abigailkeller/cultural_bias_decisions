@@ -274,8 +274,8 @@ plot_L_sub <- ggplot() +
   geom_line(data = prey_L_ordered,
             aes(x = as.numeric(x), y = y, group = id, color = as.factor(id)),
             linewidth = 1) +
-  scale_color_manual(values = c("cornflowerblue", "green4", 
-                                "goldenrod", "coral3")) +
+  scale_color_manual(values = c("cornflowerblue", "#009E73", 
+                                "goldenrod", "#D55E00")) +
   labs(x = NULL,
        y = "proportion of species\nin predator diet",
        color = "sample", linetype = "") +
@@ -305,8 +305,8 @@ plot_S_sub <- ggplot() +
   geom_line(data = prey_S_ordered,
             aes(x = as.numeric(x), y = y, group = id, color = as.factor(id)),
             linewidth = 1) +
-  scale_color_manual(values = c("cornflowerblue", "green4", 
-                                "goldenrod", "coral3"),
+  scale_color_manual(values = c("cornflowerblue", "#009E73", 
+                                "goldenrod", "#D55E00"),
                      labels = c("1", "2", "3", "4")) +
   labs(x = NULL,
        y = NULL,

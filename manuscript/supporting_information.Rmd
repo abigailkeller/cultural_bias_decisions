@@ -1,6 +1,10 @@
 ---
 title: "Supporting Information"
-output: pdf_document
+output:
+  pdf_document:
+    toc: true
+    toc_depth: 2
+    number_sections: true
 bibliography: lamprey_refs.bib
 ---
 
@@ -13,15 +17,6 @@ library(MCMCvis)
 library(kableExtra)
 ```
 
-This PDF file includes:
-
->Supporting text ...... 2
-
->Tables S1 to S7 ...... 8
-
->Figures S1 to S12 ... 30
-
->SI References ....... 40
 
 \newpage
 
@@ -77,13 +72,13 @@ $$
 
 ### MSFR data sources
 
-Here we outline the data sources used to fit the multi-species functional response model (MSFR, Equations 8-18). The model uses two sources of data: 1) gastro-intestinal consumption data from 107 euthanized California sea lions (CSL) and 2) Bonneville dam passage data from day-time visual counts in fish ladders, night-time visual counts in fish ladders, and mechanical counts in lamprey passage structures (LPS). The dam passage data is used to inform both 1) the observed abundance of fish passed, $L^P_t$ and $S^P_t$, during the time window, $t$ surrounding CSL euthanasia and 2) the probability of lamprey detection in day-time visual counts in fish ladders. 
+Here we outline the data sources used to fit the multi-species functional response model (MSFR, Equations 8-18). The model uses two sources of data: 1) gastro-intestinal consumption data from 107 euthanized California sea lions (CSL) and 2) Bonneville dam passage data from day-time visual counts in fish ladders, night-time visual counts in fish ladders, and mechanical counts in lamprey passage structures (LPS). The dam passage data is used to inform both 1) the observed abundance of fish passed, $L^P_t$ and $S^P_t$, during the time window, $t$ sea lion euthanasia occurred and 2) the probability of lamprey detection in day-time visual counts in fish ladders. 
 
 To estimate CSL consumption rates, we use data on prey items recovered in the gastro-intestinal tracks of 107 California sea lions euthanized below Bonneville dam in 2017-2019 and 2021-2023 (Table S3, Table S6). This diet analysis is based on the identification of undigested prey remains from the stomachs and large intestines of euthanized CSLs following the procedures in Lance et al. (2001), where prey were enumerated by examining all structures (otoliths, tail structures, cephalopod beaks, etc.) to determine the minimum number of individual prey items in the sample [@lance2001pinniped]. These data were retrieved from annual reports to the National Marine Fisheries Service (NMFS) documenting compliance with the terms and conditions of the authorization for lethal removal of California sea lions under the Marine Mammal Protection Act [@clark2021pinniped; @edwards2022columbia; @clark2023columbia]. 
 
 While above-surface pinniped predation events are monitored at Bonneville dam and have previously been used to estimate the CSL functional response for salmonid prey [@hatch2018sealion], these above-surface data likely underestimate lamprey predation, as lamprey predation typically occurs below surface [@tidwell2023pinniped]. We therefore use the gastro-intestinal data to reduce differences in consumption observation error between fish species. We subset the prey item data to those identified as adult Chinook salmon and Pacific lamprey, and we assume the prey items represent consumption in the 24 hours before euthanasia, as this is the time typically taken for CSL prey to pass through the digestive system (Tidwell, personal communication).
 
-To estimate the abundance of the prey available to CSL during the period of consumption, $L_t^A$ and $S_t^A$, we use fish passage data from Bonneville dam. For Chinook salmon, these data include daily, visual daytime counts across all Bonneville dam fish ladders, retrieved from the Columbia River DART database. For Pacific lamprey, however, these visual daytime counts in the fish ladders underestimate abundance, as 1) Pacific lamprey also use Lamprey Passage Structures (LPS) in addition to the fish ladders and 2) lamprey tend to migrate at night, rather than during the day [@cates2020lamprey] (Figure 2). In 2017 and 2019, mechanical counts of Pacific lamprey in five LPS and visual nighttime counts in the fish ladders were recorded and available through the Fish Passage Center database. We use these data to estimate the probability of detecting lamprey during daytime visual counts in the remaining years (2018, 2021-2023) (Table S4).
+To estimate the abundance of the prey available to CSL during the period of consumption, $L_t^A$ and $S_t^A$, we use fish passage data from Bonneville dam. For Chinook salmon, these data include daily, visual daytime counts across all Bonneville dam fish ladders, retrieved from the Columbia River DART database. For Pacific lamprey, however, these visual daytime counts in the fish ladders underestimate abundance, as 1) Pacific lamprey also use Lamprey Passage Structures (LPS) in addition to the fish ladders and 2) lamprey tend to migrate at night, rather than during the day [@cates2020lamprey] (Figure 2). These lamprey passage structures (LPS) use a mechanical counting system, where the fish moves a paddle and the attached ferrous tab as they exit the system, which is detected by a proximitiy detector and sends a voltage pulse [@cates2020lamprey]. In 2017 and 2019, mechanical counts of Pacific lamprey in five LPS and visual nighttime counts in the fish ladders were recorded and available through the Fish Passage Center database. We use these data to estimate the probability of detecting lamprey during daytime visual counts in the remaining years (2018, 2021-2023) (Table S4).
 
 The observed number of salmon and lamprey passing through the dam, $S_t^P$ and $L_t^P$ respectively, is paired with the time point $t$ of California sea lion (CSL) euthanasia. To pair these data, we take the sum of fish passing through the dam during a time window surrounding the date of euthanasia, $t$. This time window accounts for a time lag in both 1) the passage of fish remains through the body of the California sea lion (CSL) and 2) movement of fish from the entrance of the dam as prey to their moment of observation through the fish windows or lamprey passage structures (LPS) (See "Dam count data sensitivity analysis" below, Figure S11).
 
@@ -245,9 +240,7 @@ For MSFR model fitting, available prey abundance, $S^A_t$ and $L^A_t$, was resca
 
 ## Dam count data sensitivity analysis
 
-The observed number of salmon and lamprey passing through the dam, $S_t^P$ and $L_t^P$ respectively, is paired with the time point $t$ of California sea lion (CSL) euthanasia. To pair these data, we take the sum of fish passing through the dam during a time window surrounding the date of euthanasia, $t$. This time window accounts for a time lag in both 1) the passage of fish remains through the body of the California sea lion (CSL) and 2) movement of fish from the entrance of the dam as prey to their moment of observation through the fish windows or lamprey passage structures (LPS).
-
-For our main analysis, we chose a three-day time window to calculate $S_t^P$ and $L_t^P$ (one day before the date of CSL euthanasia to one day following the date of CSL euthanasia). To assess the sensitivity of our results to the selection of this time window, we conducted a sensitivity analysis with a four-day time window (one day before the date of CSL euthanasia to two days following the date of euthanasia) and a five-day time window (one day before the date of CSL euthanasia to three days following the date of euthanasia) (Figure S11).
+For our main analysis, we chose a three-day time window to calculate $S_t^P$ and $L_t^P$ (one day before the date of California sea lion (CSL) euthanasia to one day following the date of CSL euthanasia). To assess the sensitivity of our results to the selection of this time window, we conducted a sensitivity analysis with a four-day time window (one day before the date of CSL euthanasia to two days following the date of euthanasia) and a five-day time window (one day before the date of CSL euthanasia to three days following the date of euthanasia) (Figure S11).
 
 We fit the same Bayesian multi-species functional response (MSFR) model described in Equations 8-12, 14-18 where the number of salmon and lamprey passing through the dam, $S_t^P$ and $L_t^P$, respectively, were calculated using the four-day and five-day time windows. We then compared the results of our main analysis (3-day time window) to the results with the four- and five-day time window by comparing the 1) MSFR parameter estimates (Table S7) and 2) MSFR model predictions calculated with the posterior samples (Figure S12).
 

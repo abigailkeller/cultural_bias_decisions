@@ -119,8 +119,8 @@ plot <- ggplot() +
                 linetype = as.factor(mO_ddS))) +
   geom_point(data = optimal_actions,
              aes(x = alpha_L, y = S_eq, color = as.factor(set))) +
-  scale_color_manual(values = c("cornflowerblue", "green4", 
-                                "goldenrod", "coral3"),
+  scale_color_manual(values = c("cornflowerblue", "#009E73", 
+                                "goldenrod", "#D55E00"),
                      labels = c("1", "2", "3", "4")) +
   facet_wrap(~ mO_ddS, ncol = 1) +
   scale_linetype_manual(values = c("solid", "dashed", "dotted"),
