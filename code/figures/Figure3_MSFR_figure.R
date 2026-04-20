@@ -311,7 +311,8 @@ plot_S_sub <- ggplot() +
   labs(x = NULL,
        y = NULL,
        color = "posterior\nsample") +
-  theme_minimal(base_family = "Arial") +
+  theme_minimal(base_family = "Arial") + +
+  theme(legend.position = "None") +
   theme(plot.title = element_text(hjust = 0.5),
         axis.text = element_text(size = 12))
 

@@ -85,6 +85,7 @@ evpi_expect <- ggplot() +
                        expression(alpha[L] == 0.2 * alpha[S]),
                        expression(alpha[L] == 0.25 * alpha[S])
                      )) +
+  theme(legend.position = "None") +
   theme_minimal(base_family = "Arial")
 
 
