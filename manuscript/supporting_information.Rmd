@@ -27,7 +27,7 @@ library(kableExtra)
 
 ### MSFR model prior distributions
 
-Below are the vague prior distributions used for MSFR model parameters.
+Below are the vague prior distributions used for MSFR model parameters. To help with model convergence, we estimate the attack rate, $b_i$, on the log scale. Since a uniform prior on the log-transformed scale is no longer uniform on the real scale, we conduct a prior sensitivity analysis for the $\text{log}(b_i)$ prior (section 1.1.6).
 
 Handling time of species $i$:
 
@@ -259,15 +259,35 @@ We calculated the discrepancies for each data type separately, including 1) the 
 
 The p-value is then calculated as the proportion of $T(\textbf{y}_i^{\text{rep}}, \boldsymbol{\theta}_i) >T(\textbf{y}_i, \boldsymbol{\theta}_i)$ for each discrepancy function $T$ and each data type (Table S7). All Bayesian p-values are less than 0.975 and greater than 0.025, so we assume that the model adequately fits the data.
 
+### Attack rate prior sensitivity analysis
+
+For the main analysis, we estimate the MSFR attack rate $b_i$ on the log scale:
+
+$$
+\text{log}(b_i) \sim \text{Uniform}(-100, 100)
+$$
+
+ Since a uniform prior on the log-transformed scale is no longer uniform on the real scale, we conduct a prior sensitivity analysis for the $\text{log}(b)$ prior. We fit the same model with the following prior distributions for $\text{log}(b_i)$:
+
+ $$
+\text{log}(b_i) \sim \text{Uniform}(-10, 100)
+$$
+
+$$
+\text{log}(b_i) \sim \text{Uniform}(-10, 50)
+$$
+
+The posterior distributions for $\text{log}(b_i)$ are insensitive to the three choices of prior distributions (Table S8), so we conclude that inference is driven more strongly by the data, rather than the choice of prior.
+
 \newpage
 
 ## Dam count data sensitivity analysis
 
 For our main analysis, we chose a three-day time window to calculate $S_t^P$ and $L_t^P$ (one day before the date of California sea lion (CSL) euthanasia to one day following the date of CSL euthanasia). To assess the sensitivity of our results to the selection of this time window, we conducted a sensitivity analysis with a four-day time window (one day before the date of CSL euthanasia to two days following the date of euthanasia) and a five-day time window (one day before the date of CSL euthanasia to three days following the date of euthanasia) (Figure S11).
 
-We fit the same Bayesian multi-species functional response (MSFR) model described in Equations 8-12, 14-18 where the number of salmon and lamprey passing through the dam, $S_t^P$ and $L_t^P$, respectively, were calculated using the four-day and five-day time windows. We then compared the results of our main analysis (3-day time window) to the results with the four- and five-day time window by comparing the 1) MSFR parameter estimates (Table S8) and 2) MSFR model predictions calculated with the posterior samples (Figure S12).
+We fit the same Bayesian multi-species functional response (MSFR) model described in Equations 8-12, 14-18 where the number of salmon and lamprey passing through the dam, $S_t^P$ and $L_t^P$, respectively, were calculated using the four-day and five-day time windows. We then compared the results of our main analysis (3-day time window) to the results with the four- and five-day time window by comparing the 1) MSFR parameter estimates (Table S9) and 2) MSFR model predictions calculated with the posterior samples (Figure S12).
 
-With these results taken together, we conclude that although some parameter estimates change slightly (Table S8), the selection of time window has a negligible effect on the the MSFR model predictions.
+With these results taken together, we conclude that although some parameter estimates change slightly (Table S9), the selection of time window has a negligible effect on the the MSFR model predictions.
 
 \newpage
 
@@ -390,7 +410,7 @@ create_traceplot <- function(out, param, names_df,
 
 ```{r, echo = FALSE, results = "hide"}
 # read in samples
-out <- readRDS("../posterior_samples/MSFR_posterior_1day.rds")
+out <- readRDS("../posterior_samples/MSFR_posterior.rds")
 ```
 
 ```{r, echo = FALSE, results = "hide"}
@@ -883,9 +903,54 @@ knitr::kable(
 
 ```{r, echo = FALSE, results = "hide", warning=FALSE, message=FALSE}
 # read in posterior samples
-samples_1day <- readRDS("../posterior_samples/MSFR_posterior_1day.rds")
-samples_2day <- readRDS("../posterior_samples/sensitivity/passage/MSFR_posterior_2day.rds")
-samples_3day <- readRDS("../posterior_samples/sensitivity/passage/MSFR_posterior_3day.rds")
+summary_main <- MCMCsummary(readRDS("../posterior_samples/MSFR_posterior.rds"))
+summary_prior2 <- MCMCsummary(readRDS("../posterior_samples/sensitivity/prior/MSFR_blog_unif_n10_100.rds"))
+summary_prior3 <- MCMCsummary(readRDS("../posterior_samples/sensitivity/prior/MSFR_blog_unif_n10_50.rds"))
+```
+
+```{r, echo = FALSE, results = "hide", warning=FALSE, message=FALSE}
+# function for getting summary
+get_post_summary <- function(row) {
+
+  out <- paste0(round(row["mean"], 2), " (", round(row["2.5%"], 2), ", ", round(row["97.5%"], 2), ")")
+  return(out)
+
+}
+```
+
+```{r, echo = FALSE, results = "hide"}
+# get summaries
+summary_prior_sens <- data.frame(
+  prior = c("Uniform(-100, 100)", "Uniform(-10, 100)", "Uniform(-10, 50)"),
+  attack1 = c(get_post_summary(summary_main["b_log[1]", ]), get_post_summary(summary_prior2["b_log[1]", ]), 
+              get_post_summary(summary_prior3["b_log[1]", ])),
+  attack2 = c(get_post_summary(summary_main["b_log[2]", ]), get_post_summary(summary_prior2["b_log[2]", ]), 
+              get_post_summary(summary_prior3["b_log[2]", ]))
+)
+```
+
+```{r, echo = FALSE, results = "hide"}
+# change column names
+colnames(summary_prior_sens) <- c("Prior", "$\\log(b_L)$", "$\\log(b_S)$")
+```
+
+**Table S8.** Posterior summaries for prior sensitivity analysis for the log-scale MSFR attack rate, $b_i$.
+
+```{r, echo = FALSE}
+# Render table
+knitr::kable(
+  summary_prior_sens,
+  escape = FALSE,
+  format = "latex",
+  booktabs = TRUE
+)
+```
+
+```{r, echo = FALSE, results = "hide", warning=FALSE, message=FALSE}
+# read in posterior samples
+samples_1day <- readRDS("../posterior_samples/MSFR_posterior.rds")
+samples_2day <- readRDS("../posterior_samples/sensitivity/passage/MSFR_posterior_4day.rds")
+samples_3day <- readRDS("../posterior_samples/sensitivity/passage/MSFR_posterior_5day.rds")
 ```
 
 ```{r, echo = FALSE, results = "hide"}
@@ -920,7 +985,9 @@ colnames(summary_all) <- c("parameter", "summary (3 day)", "summary (4 day)",
 rownames(summary_all) <- NULL
 ```
 
-**Table S8.** Posterior summaries, including the mean and 95% credibility interval (equal tailed interval) for multi-species functional response (MSFR) parameters (Equations 1-2) with a three-day (main analysis), four-day, and five-day window.
+\vspace{24pt}
+
+**Table S9.** Posterior summaries, including the mean and 95% credibility interval (equal tailed interval) for multi-species functional response (MSFR) parameters (Equations 1-2) with a three-day (main analysis), four-day, and five-day window.
 
 ```{r, echo = FALSE}
 # Render table
