@@ -240,23 +240,23 @@ For MSFR model fitting, available prey abundance, $S^A_t$ and $L^A_t$, was resca
 
 To check model goodness-of-fit, we conducted posterior predictive checks and calculated Bayesian $P$ values [@conn2018guide]. Posterior predictive checks measure the extent to which data simulated from the posterior distribution are similar to the observed data. 
 
-We first drew parameter values from the posterior distribution (i.e., $\textbf{\theta}_i \sim [\textbf{theta}|\textbf{y}]$ and generated a replicated data set for each, $i$, $\textbf{y}_i^{rep} \sim [\textbf{y}|\textbf{\theta}_i]$. Here, $\textbf{\theta}$ includes top-level parameters in the model: 1) MSFR parameters ($b_j$, attack rate for fish species $j$, $h_j$, handling time for fish species $j$, and $q$ MSFR exponent) and 2) abundance of available fish prey at time $t$, $L_t^A$ and $S_t^A$ for lamprey and salmon, respectively. We then calculated discrepancy test statistics for both the replicated data, $T(\textbf{y}^{rep}, \textbf{\theta})$, and the observed data, $T(\textbf{y}, \textbf{\theta})$. 
+We first drew parameter values from the posterior distribution (i.e., $\boldsymbol{\theta}_i \sim [\boldsymbol{\theta}|\textbf{y}]$ and generated a replicated data set for each, $i$, $\textbf{y}_i^{\text{rep}} \sim [\textbf{y}|\boldsymbol{\theta}_i]$. Here, $\boldsymbol{\theta}$ includes top-level parameters in the model: 1) MSFR parameters ($b_j$, attack rate for fish species $j$, $h_j$, handling time for fish species $j$, and $q$ MSFR exponent) and 2) abundance of available fish prey at time $t$, $L_t^A$ and $S_t^A$ for lamprey and salmon, respectively. We then calculated discrepancy test statistics for both the replicated data, $T(\textbf{y}^{\text{rep}}, \boldsymbol{\theta})$, and the observed data, $T(\textbf{y}, \boldsymbol{\theta})$. 
 
 We considered two discrepancy functions, the chi-squared discrepancy function:
 
 $$
-T(\textbf{y}, \textbf{\theta}) = \sum_i \frac{(y_i - E(y_i|\textbf{\theta}))^2}{E(y_i|\textbf{\theta})}
+T(\textbf{y}, \boldsymbol{\theta}) = \sum_i \frac{(y_i - E(y_i|\boldsymbol{\theta}))^2}{E(y_i|\boldsymbol{\theta})}
 $$
 
 and the deviance discrepancy function:
 
 $$
-T(\textbf{y}, \textbf{\theta}) = -2\text{log}[\textbf{y}|\textbf{\theta}]
+T(\textbf{y}, \boldsymbol{\theta}) = -2\text{log}[\textbf{y}|\boldsymbol{\theta}]
 $$
 
-We calculated the discrepancies for each data type separately, including 1) the count of consumed salmon and lamprey by each sea lion individual $j$, $F_{t,j}^S$ and $F_{t,j}^L$, respectively, 2) the observed count of salmong passing through the fish ladders in time window $t$, $S_t^P$, 3) the observed count of lamprey passing through all passage structures (LPS + fish ladders) during time windows in 2017 and 2019 where lamprey night-time and LPS counts were recorded, $L_t^P \text{for} t \in \lambda^E$, and 4) the observed count of lamprey passing through all lamprey passage structures (LPS) during time windows where lamprey night-time and LPS counts were not recorded, $L_t^P \text{for} t \in \lambda^I$.
+We calculated the discrepancies for each data type separately, including 1) the count of consumed salmon and lamprey by each sea lion individual $j$, $F_{t,j}^S$ and $F_{t,j}^L$, respectively, 2) the observed count of salmon passing through the fish ladders in time window $t$, $S_t^P$, 3) the observed count of lamprey passing through all passage structures (LPS + fish ladders) during time windows in 2017 and 2019 where lamprey night-time and LPS counts were recorded, $L_t^P \space \text{for} \space t \in \lambda^E$, and 4) the observed count of lamprey passing through all lamprey passage structures (LPS) during time windows where lamprey night-time and LPS counts were not recorded, $L_t^P \space \text{for} \space t \in \lambda^I$.
 
-The p-value is then calculated as for each discrepancy function $T$ and each data type.
+The p-value is then calculated as the proportion of $T(\textbf{y}_i^{\text{rep}}, \boldsymbol{\theta}_i) >T(\textbf{y}_i, \boldsymbol{\theta}_i)$ for each discrepancy function $T$ and each data type.
 
 \newpage
 
