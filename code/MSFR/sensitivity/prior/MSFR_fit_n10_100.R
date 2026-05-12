@@ -148,7 +148,7 @@ MSFR_model <- nimbleCode({
   # MSFR params
   for (i in 1:n_species) {
     h[i] ~ dunif(0, 1000) # handling time
-    b_log[i] ~ dunif(-10, 100) # attack rate
+    b_log[i] ~ dunif(-10, 50) # attack rate
   }
   
   q ~ dunif(-2, 2)
@@ -291,4 +291,4 @@ out_sub <- list(
 )
 
 # save samples
-saveRDS(out_sub, "posterior_samples/MSFR_posterior_1day.rds")
+saveRDS(out_sub, "posterior_samples/sensitivity/prior/MSFR_blog_unif_n10_50.rds")

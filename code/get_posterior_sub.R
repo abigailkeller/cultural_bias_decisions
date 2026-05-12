@@ -8,7 +8,7 @@ utility <- readRDS("VOI/utility_fullposterior.rds")
 
 # get posterior
 posterior <- do.call(rbind, 
-                     readRDS("posterior_samples/MSFR_posterior_1day.rds"))
+                     readRDS("posterior_samples/MSFR_posterior.rds"))
 set.seed(123)
 index <- sample(nrow(posterior), 1000)
 posterior <- posterior[index, ]

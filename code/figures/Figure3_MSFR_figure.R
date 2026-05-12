@@ -41,7 +41,7 @@ data_gastro_sub <- left_join(data_gastro_sub, dates_df, by = "Date")
 
 # get posterior summaries
 posterior <- do.call(rbind, 
-                     readRDS("posterior_samples/MSFR_posterior_1day.rds"))
+                     readRDS("posterior_samples/MSFR_posterior.rds"))
 posterior_sub <- posterior[, c(1:46, 93:138)]
 propN_L <- matrix(NA, nrow = nrow(posterior_sub), 
                   ncol = ncol(posterior_sub) / 2)

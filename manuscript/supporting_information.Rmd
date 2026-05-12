@@ -5,6 +5,7 @@ output:
     toc: true
     toc_depth: 2
     number_sections: true
+    extra_dependencies: ["array", "longtable", "booktabs"]
 bibliography: lamprey_refs.bib
 ---
 
@@ -78,7 +79,7 @@ To estimate CSL consumption rates, we use data on prey items recovered in the ga
 
 While above-surface pinniped predation events are monitored at Bonneville dam and have previously been used to estimate the CSL functional response for salmonid prey [@hatch2018sealion], these above-surface data likely underestimate lamprey predation, as lamprey predation typically occurs below surface [@tidwell2023pinniped]. We therefore use the gastro-intestinal data to reduce differences in consumption observation error between fish species. We subset the prey item data to those identified as adult Chinook salmon and Pacific lamprey, and we assume the prey items represent consumption in the 24 hours before euthanasia, as this is the time typically taken for CSL prey to pass through the digestive system (Tidwell, personal communication).
 
-To estimate the abundance of the prey available to CSL during the period of consumption, $L_t^A$ and $S_t^A$, we use fish passage data from Bonneville dam. For Chinook salmon, these data include daily, visual daytime counts across all Bonneville dam fish ladders, retrieved from the Columbia River DART database. For Pacific lamprey, however, these visual daytime counts in the fish ladders underestimate abundance, as 1) Pacific lamprey also use Lamprey Passage Structures (LPS) in addition to the fish ladders and 2) lamprey tend to migrate at night, rather than during the day [@cates2020lamprey] (Figure 2). These lamprey passage structures (LPS) use a mechanical counting system, where the fish moves a paddle and the attached ferrous tab as they exit the system, which is detected by a proximitiy detector and sends a voltage pulse [@cates2020lamprey]. In 2017 and 2019, mechanical counts of Pacific lamprey in five LPS and visual nighttime counts in the fish ladders were recorded and available through the Fish Passage Center database. We use these data to estimate the probability of detecting lamprey during daytime visual counts in the remaining years (2018, 2021-2023) (Table S4).
+To estimate the abundance of the prey available to CSL during the period of consumption, $L_t^A$ and $S_t^A$, we use fish passage data from Bonneville dam. For Chinook salmon, these data include daily, visual daytime counts across all Bonneville dam fish ladders, retrieved from the Columbia River DART database (https://www.cbr.washington.edu/dart/query/adult_graph_text). For Pacific lamprey, however, these visual daytime counts in the fish ladders underestimate abundance, as 1) Pacific lamprey also use Lamprey Passage Structures (LPS) in addition to the fish ladders and 2) lamprey tend to migrate at night, rather than during the day [@cates2020lamprey] (Figure 2). These lamprey passage structures (LPS) use a mechanical counting system, where the fish moves a paddle and the attached ferrous tab as they exit the system, which is detected by a proximity detector and sends a voltage pulse [@cates2020lamprey]. In 2017 and 2019, mechanical counts of Pacific lamprey in five LPS and visual nighttime counts in the fish ladders were recorded and available through the Fish Passage Center database (https://www.fpc.org/webapps/adultsalmon/Q_adultcounts_lamprey_dataquery.php). We use these data to estimate the probability of detecting lamprey during daytime visual counts in the remaining years (2018, 2021-2023) (Table S4).
 
 The observed number of salmon and lamprey passing through the dam, $S_t^P$ and $L_t^P$ respectively, is paired with the time point $t$ of California sea lion (CSL) euthanasia. To pair these data, we take the sum of fish passing through the dam during a time window surrounding the date of euthanasia, $t$. This time window accounts for a time lag in both 1) the passage of fish remains through the body of the California sea lion (CSL) and 2) movement of fish from the entrance of the dam as prey to their moment of observation through the fish windows or lamprey passage structures (LPS) (See "Dam count data sensitivity analysis" below, Figure S11).
 
@@ -240,7 +241,7 @@ For MSFR model fitting, available prey abundance, $S^A_t$ and $L^A_t$, was resca
 
 To check model goodness-of-fit, we conducted posterior predictive checks and calculated Bayesian $P$ values [@conn2018guide]. Posterior predictive checks measure the extent to which data simulated from the posterior distribution are similar to the observed data. 
 
-We first drew parameter values from the posterior distribution (i.e., $\boldsymbol{\theta}_i \sim [\boldsymbol{\theta}|\textbf{y}]$ and generated a replicated data set for each, $i$, $\textbf{y}_i^{\text{rep}} \sim [\textbf{y}|\boldsymbol{\theta}_i]$. Here, $\boldsymbol{\theta}$ includes top-level parameters in the model: 1) MSFR parameters ($b_j$, attack rate for fish species $j$, $h_j$, handling time for fish species $j$, and $q$ MSFR exponent) and 2) abundance of available fish prey at time $t$, $L_t^A$ and $S_t^A$ for lamprey and salmon, respectively. We then calculated discrepancy test statistics for both the replicated data, $T(\textbf{y}^{\text{rep}}, \boldsymbol{\theta})$, and the observed data, $T(\textbf{y}, \boldsymbol{\theta})$. 
+We first drew parameter values from the posterior distribution (i.e., $\boldsymbol{\theta}_i \sim [\boldsymbol{\theta}|\textbf{y}]$) and generated a replicated data set for each, $i$, $\textbf{y}_i^{\text{rep}} \sim [\textbf{y}|\boldsymbol{\theta}_i]$. Here, $\boldsymbol{\theta}$ includes top-level parameters in the model: 1) MSFR parameters ($b_j$, attack rate for fish species $j$; $h_j$, handling time for fish species $j$; and $q$, MSFR exponent) and 2) abundance of available fish prey at time $t$, $L_t^A$ and $S_t^A$ for lamprey and salmon, respectively. We then calculated discrepancy test statistics for both the replicated data, $T(\textbf{y}^{\text{rep}}, \boldsymbol{\theta})$, and the observed data, $T(\textbf{y}, \boldsymbol{\theta})$. 
 
 We considered two discrepancy functions, the chi-squared discrepancy function:
 
@@ -254,9 +255,9 @@ $$
 T(\textbf{y}, \boldsymbol{\theta}) = -2\text{log}[\textbf{y}|\boldsymbol{\theta}]
 $$
 
-We calculated the discrepancies for each data type separately, including 1) the count of consumed salmon and lamprey by each sea lion individual $j$, $F_{t,j}^S$ and $F_{t,j}^L$, respectively, 2) the observed count of salmon passing through the fish ladders in time window $t$, $S_t^P$, 3) the observed count of lamprey passing through all passage structures (LPS + fish ladders) during time windows in 2017 and 2019 where lamprey night-time and LPS counts were recorded, $L_t^P \space \text{for} \space t \in \lambda^E$, and 4) the observed count of lamprey passing through all lamprey passage structures (LPS) during time windows where lamprey night-time and LPS counts were not recorded, $L_t^P \space \text{for} \space t \in \lambda^I$.
+We calculated the discrepancies for each data type separately, including 1) the count of consumed salmon and lamprey by each sea lion individual $j$, $F_{t,j}^S$ and $F_{t,j}^L$, respectively, 2) the observed count of salmon passing through the fish ladders in time window $t$, $S_t^P$, 3) the observed count of lamprey passing through all passage structures (LPS + fish ladders) during time windows in 2017 and 2019 where lamprey night-time and LPS counts were recorded, $L_t^P \text{ for } t \in \lambda^E$, and 4) the observed count of lamprey passing through all lamprey passage structures (LPS) during time windows where lamprey night-time and LPS counts were not recorded, $L_t^P \text{ for } t \in \lambda^I$.
 
-The p-value is then calculated as the proportion of $T(\textbf{y}_i^{\text{rep}}, \boldsymbol{\theta}_i) >T(\textbf{y}_i, \boldsymbol{\theta}_i)$ for each discrepancy function $T$ and each data type.
+The p-value is then calculated as the proportion of $T(\textbf{y}_i^{\text{rep}}, \boldsymbol{\theta}_i) >T(\textbf{y}_i, \boldsymbol{\theta}_i)$ for each discrepancy function $T$ and each data type (Table S7). All Bayesian p-values are less than 0.975 and greater than 0.025, so we assume that the model adequately fits the data.
 
 \newpage
 
@@ -264,9 +265,9 @@ The p-value is then calculated as the proportion of $T(\textbf{y}_i^{\text{rep}}
 
 For our main analysis, we chose a three-day time window to calculate $S_t^P$ and $L_t^P$ (one day before the date of California sea lion (CSL) euthanasia to one day following the date of CSL euthanasia). To assess the sensitivity of our results to the selection of this time window, we conducted a sensitivity analysis with a four-day time window (one day before the date of CSL euthanasia to two days following the date of euthanasia) and a five-day time window (one day before the date of CSL euthanasia to three days following the date of euthanasia) (Figure S11).
 
-We fit the same Bayesian multi-species functional response (MSFR) model described in Equations 8-12, 14-18 where the number of salmon and lamprey passing through the dam, $S_t^P$ and $L_t^P$, respectively, were calculated using the four-day and five-day time windows. We then compared the results of our main analysis (3-day time window) to the results with the four- and five-day time window by comparing the 1) MSFR parameter estimates (Table S7) and 2) MSFR model predictions calculated with the posterior samples (Figure S12).
+We fit the same Bayesian multi-species functional response (MSFR) model described in Equations 8-12, 14-18 where the number of salmon and lamprey passing through the dam, $S_t^P$ and $L_t^P$, respectively, were calculated using the four-day and five-day time windows. We then compared the results of our main analysis (3-day time window) to the results with the four- and five-day time window by comparing the 1) MSFR parameter estimates (Table S8) and 2) MSFR model predictions calculated with the posterior samples (Figure S12).
 
-With these results taken together, we conclude that although some parameter estimates change slightly (Table S7), the selection of time window has a negligible effect on the the MSFR model predictions.
+With these results taken together, we conclude that although some parameter estimates change slightly (Table S8), the selection of time window has a negligible effect on the the MSFR model predictions.
 
 \newpage
 
@@ -849,10 +850,42 @@ knitr::kable(
 \newpage
 
 ```{r, echo = FALSE, results = "hide", warning=FALSE, message=FALSE}
+# read posterior predictive data
+ppc <- readRDS("../data/ppp.rds")
+
+# round p value
+ppc$pvalue <- round(ppc$pvalue, 2)
+
+# update chi-squared
+ppc$disc_type <- gsub("chisq", "chi-squared", ppc$disc_type)
+
+# update data
+ppc$data <- c("$F_{t,j}$", "$S_t^P$", "$L_t^P\\quad \\text{for} \\quad t \\in \\lambda^E$", "$L_t^P\\quad \\text{for} \\quad t \\in \\lambda^I$", 
+              "$F_{t,j}$", "$S_t^P$", "$L_t^P\\quad \\text{for} \\quad t \\in \\lambda^E$", "$L_t^P\\quad \\text{for} \\quad t \\in \\lambda^I$")
+
+# change column names
+colnames(ppc) <- c("Discrepancy", "Data Type", "P-value")
+```
+
+**Table S7.** Posterior predictive p-values for each discrepancy test statistic and data type ($F_{t,j}$, count of consumed salmon and lamprey by each sea lion individual $j$; $S_t^P$, observed count of salmon passing through the fish ladders in time window $t; $L_t^P \text{ for } t \in \lambda^E$, observed count of lamprey passing through all passage structures (LPS + fish ladders) during time windows where lamprey night-time and LPS counts were recorded; $L_t^P \text{ for } t \in \lambda^I$, observed count of lamprey passing through all lamprey passage structures (LPS) during time windows where lamprey night-time and LPS counts were not recorded).
+
+```{r, echo = FALSE}
+# Render table
+knitr::kable(
+  ppc,
+  escape = FALSE,
+  format = "latex",
+  booktabs = TRUE
+)
+```
+
+\newpage
+
+```{r, echo = FALSE, results = "hide", warning=FALSE, message=FALSE}
 # read in posterior samples
 samples_1day <- readRDS("../posterior_samples/MSFR_posterior_1day.rds")
-samples_2day <- readRDS("../posterior_samples/MSFR_posterior_2day.rds")
-samples_3day <- readRDS("../posterior_samples/MSFR_posterior_3day.rds")
+samples_2day <- readRDS("../posterior_samples/sensitivity/passage/MSFR_posterior_2day.rds")
+samples_3day <- readRDS("../posterior_samples/sensitivity/passage/MSFR_posterior_3day.rds")
 ```
 
 ```{r, echo = FALSE, results = "hide"}
@@ -882,14 +915,12 @@ summary_all <- cbind(
                              ", ", sprintf("%.2f", `97.5%`), ")")) %>%
     select(sum_3day)
 )
-colnames(summary_all) <- c("parameter", "summary (1 day)", "summary (2 day)",
-                           "summary (3 day)")
+colnames(summary_all) <- c("parameter", "summary (3 day)", "summary (4 day)",
+                           "summary (5 day)")
 rownames(summary_all) <- NULL
 ```
 
-\newpage
-
-**Table S7.** Posterior summaries, including the mean and 95% credibility interval (equal tailed interval) for multi-species functional response (MSFR) parameters (Equations 1-2) with a three-day, four-day, and five-day window.
+**Table S8.** Posterior summaries, including the mean and 95% credibility interval (equal tailed interval) for multi-species functional response (MSFR) parameters (Equations 1-2) with a three-day (main analysis), four-day, and five-day window.
 
 ```{r, echo = FALSE}
 # Render table

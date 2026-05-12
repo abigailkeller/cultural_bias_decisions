@@ -224,7 +224,7 @@ theta <- c("h", "b_log", "q", "S_A", "L_A")
 theta <- myModel$expandNodeNames(theta)
 
 # read in samples 
-samples_in <- readRDS("posterior_samples/MSFR_posterior_1day.rds")
+samples_in <- readRDS("posterior_samples/MSFR_posterior.rds")
 
 # calculate with a subset of samples
 lower <- 1

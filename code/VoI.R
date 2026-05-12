@@ -8,7 +8,7 @@ source("code/timeseries_functions.R")
 
 # read in MSFR posterior
 posterior <- do.call(rbind, 
-                     readRDS("posterior_samples/MSFR_posterior_1day.rds"))
+                     readRDS("posterior_samples/MSFR_posterior.rds"))
 
 # randomly select 1000 samples
 set.seed(123)
