@@ -68,11 +68,11 @@ In this study, we apply a decision theoretic lens to quantify the degree to whic
 
 \section*{Results}
 
-\subsection{Multi-species dynamical system}
+\subsection*{Multi-species dynamical system}
 
 We first built a stylized model of a Chinook salmon (\textit{Oncorhynchus tshawytscha}) and Pacific lamprey dynamical system throughout their lifecycles as anadromous fish, including estuarine predation by California sea lions, freshwater population growth, and marine mortality (Box 1). We modeled Chinook salmon and Pacific lamprey interactions in 1) the marine environment through a density-dependent host-parasite relationship and 2) the estuarine environment through a density-dependent, multi-species functional response (MSFR), where the rate of California sea lion consumption is a function of the abundance of lamprey and salmon in the prey community. These two lamprey and salmon interactions were used to represent the rate at which lamprey modulate salmon survival as both a parasite of salmon and a predation offset for salmon. The parameter values used to describe freshwater population growth and marine mortality were guided by historical observations and are described in Table S1, whereas the MSFR parameters were directly estimated with data. 
 
-\subsection{Quantified multi-species functional response uncertainty}
+\subsection*{Quantified multi-species functional response uncertainty}
 
 To quantify uncertainty in the California sea lion multi-species functional response (MSFR) (Equations 1-2), we developed a Bayesian model that relates sea lion prey consumption data from gastro-intestinal diet analysis to the observed count of fish passing through Bonneville dam. We sampled the posterior distribution to quantify parametric uncertainty in the species-specific, density-dependent attack rates, $b_i$, species-specific handling times, $h_i$, and MSFR exponent, $q$ in Equations 1-2 (Table S2, Figure S2).
 
@@ -85,7 +85,7 @@ The relatively low abundance of lamprey in the prey community limited observatio
     \caption{Multi-species functional response, measuring the rate at which California sea lions consume prey as a function of the composition of the prey community. \textbf{A.} Relationship between the proportion of each fish species in the predator diet, measured with gastro-intestinal analysis of euthanized California sea lions, and proportion of each fish species in the prey community, based on the mean posterior estimate of available prey, $L_A$ and $S_A$ for salmon and lamprey, respectively. The credibility intervals for the estimates of available prey, $L_A$ and $S_A$, are shown in Figure S3. \textbf{B.} Conceptual multi-species functional responses demonstrating how two multi-species functional response curves can have similar local properties in the observed parametric region shown in panel A, yet different global properties due to a large, unobserved parametric region. \textbf{C.} Estimated multi-species functional response, where each black line represents a posterior sample describing the predicted relationship between the expected proportion of each species in the sea lion diet and the proportion of each species in the prey community. Four posterior samples are highlighted in color and are used in Figure 4. The dashed line indicates the 1:1 line, where sea lion consume prey in equal proportion to their abundance in the prey community.}
 \end{figure}
 
-\subsection{Decision model}
+\subsection*{Decision model}
 
 We built a decision model to quantify one cost of lamprey-related uncertainty to a decision maker. The Pacific lamprey has both inherent value and spiritual and cultural value to humans, including as a First Food for Columbia River Basin tribes \parencite{close2002ecological, CRITFC_2011}. However, for the purposes of this decision problem, we primarily considered the value of Pacific lamprey through its ecological role as a predation offset for salmonids to reflect a decision maker whose values align with the dominant value system in the region that prioritizes Pacific salmon. We therefore framed the decision problem as finding the action, $a^*$, that maximizes utility, $U$, where utility is defined as the equilibrium abundance of Chinook salmon returning to spawn in freshwater, $\hat{R}_S$.
 
@@ -100,7 +100,7 @@ The optimal action, $a^*$, that maximized utility (i.e., equilibrium abundance o
     \caption{Quantifying the value of reducing lamprey-related uncertainty. \textbf{A.} Relationship between the expected utility and action for each multi-species functional response (MSFR) posterior sample highlighted in Figure 3C. Asterisk indicates that the expected utility, $E_P[U(a, f, p)]$, is calculated as the expectation over parasitism uncertainty, $P$ (Figure 2). The actions are the lamprey production, $\alpha_L$, relative to salmon production, $\alpha_S$, and can be understood as actions that either increase freshwater lamprey adult survival or the intrinsic rate of lamprey population growth. The points indicate the action that maximizes expected utility (i.e., $\text{max}_aE_P[U(a,f,p)]$) for each expression of functional response uncertainty. The black line indicates the expected utility over both parasitism and functional response uncertainty (i.e., $E_{F, P}[U(a,f,p)]$), and the black point indicates the action that maximizes utility over all uncertainty, or the bet-hedging strategy (i.e., $\text{max}_aE_{F,P}[U(a,f,p)]$). \textbf{B.} Violin plot of the maximized expected utility of all posterior samples, calculated as the expectation across parasitism uncertainty (i.e., $\text{max}_aE_P[U(a,f,p)]$). Colored points indicate the maximized expected utility of the selected posterior samples from panel A. The black point indicates the maximized expected utility across both parasitism and functional response uncertainty, or the utility associated with the bet-hedging strategy, $\text{max}_aE_{F,P}[U(a,f,p)]$. The purple dashed line indicates the expected utility after all uncertainty has been resolved, $E_{F,P}[\text{max}_aU(a,f,p)]$. The expected value of functional response and parasitism information (i.e., expected value of perfect information, EVPI) is therefore the difference between $E_{F,P}[\text{max}_aU(a,f,p)]$ and $\text{max}_aE_{F,P}[U(a,f,p)]$. Purple shading signifies reduction of uncertainty.}
 \end{figure}
 
-\subsection{Cost of lamprey uncertainty to a decision maker}
+\subsection*{Cost of lamprey uncertainty to a decision maker}
 
 In the context of this decision problem, the value of lamprey information was quantified as the expected improvement on the management objective (maximize abundance of Chinook salmon returning to the Columbia River Basin) if functional response uncertainty, $F$, and parasitism uncertainty, $P$, were reduced \parencite{runge2011uncertainty}. The utility associated with the bet-hedging strategy  ($\text{max}_aE_{F,P}[U(a,f,p)]$) was 125,343 fish, whereas the expected utility after all uncertainty had been resolved was 132,511 fish (Figure 4B). The expected value of perfect information, EVPI, was therefore 7167 fish (Figure 4B). Framed another way, the expected increase in Chinook salmon returning to the Columbia River Basin was 7167 fish, if lamprey uncertainty - generated as an outcome of cultural bias - was not impeding the choice of action.
 
@@ -109,25 +109,25 @@ In the context of this decision problem, the value of lamprey information was qu
 
 Evaluating the outcomes of conservation actions can be limited by model uncertainty that arises from cultural bias. To explore this challenge, we develop a decision model representing the dynamics and management of three interacting species in the Columbia River Basin, where management has historically focused on high-value salmon fisheries and recent predation pressure by sea lions while overlooking a culturally and ecologically important species - the Pacific lamprey. We identify that the focus and historical bias against Pacific lamprey by dominant, Euro-American society has led to asymmetric measurement error and observation limited to local properties of the system with lamprey at low relative abundance. As a result of this historical bias, we find that multiple functional forms for the rate of sea lion predation on these two fish species fit the observed data equally well, yet differ in resultant management policies \parencite{runge2002importance}. We show that compared to an action designed to perform optimally despite uncertainty, resolving uncertainty related to the rates of California sea lion predation and Pacific lamprey parasitism would increase the expected number of Pacific salmon returning to the Columbia River by almost 6\%. While the ecological community broadly acknowledges the ways in which humans and systems of power shape knowledge disparities and assumptions in ecological modeling \parencite{chapman2024biodiversity, silver2022fish}, our work takes an important step towards quantifying how legacies of cultural bias in environmental management impede today's conservation decisions.
 
-\subsection{Reducing unknown unknowns}
+\subsection*{Reducing unknown unknowns}
 
 Quantifying the cost of cultural bias to a decision maker through a Value of Information (VOI) analysis is only possible if a spark brings to light previously ignored sources of uncertainty. In the case of the Pacific lamprey, Native American tribes began championing the importance of the species in the early 1990s, recognizing the declining numbers of lamprey and reflecting on the role of dominant Euro-American societal values in contributing to the species' decline \parencite{clemens2017conservation, close2002ecological, close2004traditional}. There is, however, not a VOI calculus for uncertainty that is not articulated, reflecting the philosophical conundrum of understanding the cost of “unknown unknowns” in scenarios where the truth lies far outside of the articulated hypotheses \parencite{wintle2010allocating}.
 
 Moving from “unknown unknowns” to quantifying the cost of “known unknowns” can involve interrogating systems of knowledge production through long-established ideas from the fields of environmental justice and science and technology studies. Structural uncertainty in ecological modeling is often not random, as science is not neutral to power and uneven knowledge can arise systematically from political-economic structures and processes \parencite{silver2022fish, bloor2004sociology}. Here, we have investigated how uneven distribution of power has shaped conservation investment and research in the Columbia River Basin, quantified statistical uncertainty as a result of these intertwined environmental and social processes, and evaluated the impact of this uncertainty on management decisions. Considering knowledge production as a social process in statistical ecology and decision making will be crucial for understanding how legacies of human structures can be present or create absences in ecological model development.
 
-\subsection{Implications for conservation decision making}
+\subsection*{Implications for conservation decision making}
 
 Conservation decision making is always bias- and value-laden; in fact, decision theory encourages value-based thinking and posits that values should be the driving force for decision making \parencite{keeney1996value}. Danger, however, comes from a lack of reflection on where values enter the decision-making process. Decision analysis traditionally assumes that facts and values are separable: values are used to formulate the decision context and objectives, and facts are used to determine the consequences of actions \parencite{gregory2012structured}. Here we have shown that historical values of a dominant society limit the information needed to predict the consequences of actions, generating a quantifiable impediment to decision making about salmon and lamprey management in the Columbia River Basin.
 
 While the inseparability of facts and values may challenge the conceptual foundation of decision analysis and structured decision making, including reflexive and relational thinking in adaptive management cycles represents a productive path forward. Adaptive management (AM) involves acknowledging uncertainty and seeking to reduce it through the process of management; AM can include two learning cycles, a technical learning cycle nested within a larger cycle of learning about the decision structure itself \parencite{williams2016technical}. To reduce uncertainty in how systems of power shape knowledge production and impede decision making in the Columbia River Basin, this outer loop of double-loop learning could involve processes by which a decision analyst extends a relational understanding of the world to modeling, a practice known as “Situated Modeling” \parencite{klein2024situated}. This practice includes reflecting on the broader context in which knowledge is generated, questioning where modeling assumptions come from and what is left out, and broadening perspectives and ways of knowing at the decision-making table. This perspective also requires a shift away from models as authorities in decision making and toward models as objects to initiate discussion and create consensus \parencite{schluter2019potential}.
 
-\subsection{Limitations of an utilitarian understanding of information value}
+\subsection*{Limitations of an utilitarian understanding of information value}
 
 In this analysis, we applied a Western science approach to assess potential impacts of cultural bias in conservation decision making, illustrating this issue by using the currency of the current system of power. We also only focused our analysis on how dominant observation systems can create uncertainties, rather than interrogating the consequences of favoring dominant observation systems at the expense of other perspectives and ways of observing. This approach has both benefits and limitations: while Western scientific data and models can be instruments of domination and exclusion, they can invite contestation due to their legibility and transparency \parencite{peluso1995whose, scoville2025maps}.
 
 While we translated signatures of cultural bias reflected in ecological data to a measurement of cost in units relevant to a decision maker (i.e., expected number of salmon), this utilitarian representation reflects a narrow understanding of information value. We also chose to evaluate the cost of lamprey uncertainty with respect to one decision objective - maximize the expected annual abundance of adult Chinook salmon returning to the CRB - among many possible decision objectives. This deliberate choice to frame the value of lamprey through the lens of its ecosystem service for salmon was chosen to represent how an historic, dominant value system that prioritizes Pacific salmon can impede decision making, even if the value system remains unchanged. The cost of cultural bias, however, would change with a different decision objective or a different understanding of cost. Human bias in decision making affects the distribution of costs and benefits of decisions across different groups \parencite{okamoto2020attending}. Including an objective related to fairness or equity would allow measurement of how uncertainty about Pacific lamprey impedes knowledge of who bears risk as an outcome of a decision \parencite{lockwood2010governance}. Cultural bias-derived uncertainty can also impede decision making in other ways, including generating conflict and diminishing trust among decision makers, thereby inhibiting the adaptive governance of the social-ecological system \parencite{folke2005adaptive}. 
 
-\subsection{Conclusion}
+\subsection*{Conclusion}
 
 By combining uncertainty quantification with decision theory, we have demonstrated one approach to measuring the cost of overlooking the Pacific lamprey in decision making in an important regional fishery. The Bayesian approach to uncertainty quantification offers a flexible framework for representing uneven data-generating processes, and the Value of Information analysis facilitates systematic exploration of this uncertainty in a decision-making context. By unifying these approaches, we quantify the extent to which uncertainty about Pacific lamprey impedes decision making about Chinook salmon, which can be understood as the cost of cultural bias, measured in units relevant to a decision maker.
 
@@ -136,11 +136,11 @@ By combining uncertainty quantification with decision theory, we have demonstrat
 
 We first describe a stylized representation of a Chinook salmon and Pacific lamprey dynamical system (Box 1). We then quantify uncertainty in estuarine predation using a Bayesian multi-species functional response (MSFR) model using sea lion gastro-intestinal diet data and fish passage data at Bonneville dam. Finally, we build a decision model that accounts for multiple sources of uncertainty in the dynamical system to evaluate management actions with respect to an objective of maximizing Chinook salmon equilibrium abundance. Using a Value of Information (VOI) analysis, we quantify how parametric uncertainty - generated as an outcome of cultural bias - impedes decision making.
 
-\subsection{Multi-species dynamical system}
+\subsection*{Multi-species dynamical system}
 
 Chinook salmon and Pacific lamprey are anadromous fish, migrating from freshwater rivers to the ocean and back to spawn in or near their natal streams \parencite{hess2023return}. While their lifecycles in the freshwater and marine systems extend across many years, we simplify the cycle to occur across one time step from $t$ to $t + 1$.
 
-\subsubsection{Estuary predation}
+\subsubsection*{Estuary predation}
 
 The expected number of Pacific lamprey and Chinook salmon consumed by California sea lions is described using a multi-species functional response (MSFR) that allows the attack rate to be dependent on prey density \parencite{rosenbaum2024towards}. Here, $\widetilde{F}_i$ represents the expected number of prey $i$ consumed per predator integrated across one day, $a_i$ represents the density-dependent attack rate of species $i$, $h_k$ represents the handling time for species $k = 1 \dots m$, and $E_i$ represents the abundance of species $i$ entering the estuary. 
 
@@ -160,7 +160,7 @@ The relationship between the abundance of fish returning to freshwater to spawn,
 R_i = E_i - \widetilde{F}_i \times P  
 \end{equation}
 
-\subsubsection{Freshwater population growth}
+\subsubsection*{Freshwater population growth}
 
 The relationship between 1) the abundance of fish returning to the Columbia River Basin to spawn, $R_i$ and 2) the abundance of juveniles/smolts exiting Bonneville dam downstream, $J_i$, is described with the Beverton-Holt stock-recruit relationship, where $\alpha$ is a production parameter, and $K$ is the smolt or juvenile carrying capacity. The production parameter, $\alpha$, combines both freshwater mortality and the population intrinsic rate of growth.
 
@@ -172,7 +172,7 @@ J_i = R_i \times \frac{\alpha_i}{(1+\beta_iR_i)}
 \beta_i = \frac{\alpha_i}{K_i}
 \end{equation}
 
-\subsubsection{Marine mortality}
+\subsubsection*{Marine mortality}
 
 In the marine environment, Chinook salmon and Pacific lamprey exhibit a host-parasite relationship \parencite{clemens2017conservation}. Salmonid host abundance in the marine environment is a principal factor in predicting Pacific lamprey returns to the Columbia River \parencite{murauskas2013relationships}, and while Chinook salmon are common lamprey hosts and exhibit wounds from Pacific lamprey bites \parencite{weitkamp2015seasonal, shevlyakov2010traumatization}, the effect of these bites on their physiological condition is not well understood \parencite{pelenev2008predator}.
 
@@ -190,11 +190,11 @@ E_S = J_S \times \phi \times (1 - \text{e}^{-D_S/J_L})
 
 Here, density-independent ocean survival, $\phi$, is shared between both species.
 
-\subsection{Quantifying uncertainty in the multi-species functional response (MSFR)}
+\subsection*{Quantifying uncertainty in the multi-species functional response (MSFR)}
 
 Below we outline the Bayesian model formulation used to estimate the multi-species functional response (MSFR) parameters with California sea lion gastro-intestinal diet data and fish count data at Bonneville dam (Tables S3-S6). More information on data sources and model fitting can be found in Supporting Information.
 
-\subsubsection{Chinook salmon prey abundance}
+\subsubsection*{Chinook salmon prey abundance}
 
 The observed number of Chinook salmon passing through the Bonneville dam fish ladders in time window, $t$, $S^P_{t}$, is drawn from a Poisson distribution with $\widetilde{S^P_{t}}$ representing the expected number of salmon passed (Table S4):
 
@@ -208,7 +208,7 @@ The number of salmon available for sea lion consumption, $S^A_t$ is greater than
 \widetilde{S^P_t} \sim \text{Binomial}(S^A_t - \sum^{O_t}_{j=1}{F^S_{t, j}},p_S)
 \end{equation}
 
-\subsubsection{Pacific lamprey prey abundance}
+\subsubsection*{Pacific lamprey prey abundance}
 
 In the years 2017 and 2019 when the lamprey night-time and LPS counts were recorded, the observed number of lamprey passing through all passage structures (LPS + fish ladders) in time window $t$, $L^P_t$, is drawn from a Poisson distribution with $\widetilde{L^P_t}$ representing the expected number of lamprey passed (Table S4):
 
@@ -242,7 +242,7 @@ The number of lamprey available for sea lion consumption, $L^A_t$ is greater tha
 \widetilde{L^P_t} \sim \text{Binomial}(L^A_t - \sum^{O_t}_{j=1}{F^L_{t, j}},p_L)
 \end{equation}
 
-\subsubsection{Consumed prey}
+\subsubsection*{Consumed prey}
 The number of prey consumed by each sea lion individual is likely to deviate from the expected number of prey consumed due to heterogeneity in preference and behavior across sea lion individuals. Model process error is therefore incorporated as Poisson-distributed variation in sea lion consumption rates. The observed number of Chinook salmon and Pacific lamprey consumed by sea lion individual $j$, $F^S_{t,j}$ and $F^L_{t,j}$, respectively, is drawn from a Poisson distribution with the expected number of prey consumed, $\widetilde{F^S_{t}}$ and $\widetilde{F^L_{t}}$, as the rate parameters, respectively (Table S6):
 
 \begin{equation}
@@ -252,7 +252,7 @@ F^S_{t, j} \sim \text{Poisson}(\widetilde{F^S_{t}})
 F^L_{t, j} \sim \text{Poisson}(\widetilde{F^L_{t}})
 \end{equation}
 
-\subsubsection{Multi-species functional response (MSFR)}
+\subsubsection*{Multi-species functional response (MSFR)}
 
 The expected number of prey consumed, $\widetilde{F_{i,t}}$, of species $i$ is related to the available number of prey, $A_{i,t} = \{S^A_{t}, L^A_{t}\}$, using the MSFR described in Equations 1-2.
 
@@ -266,13 +266,13 @@ a_{i,t} = b_iA_{i,t}^q
 
 
 
-\subsection{Decision model}
+\subsection*{Decision model}
 
 We then developed a decision model, where we framed the decision problem as finding the action, $a^*$, that maximizes utility, $U$, where utility is defined as the equilibrium abundance of Chinook salmon returning to spawn in freshwater, $\hat{R}_S$. The set of actions, $a \in A$, under consideration in the decision problem include changes in lamprey production, $\alpha_L$. While many uncertainties exist in this system, we considered two sources of parametric uncertainty (Figure 2): 1) functional response uncertainty, $F$ (Figure 3) and 2) parasitism uncertainty, $P$, describing uncertainty in the rate at which salmon ocean survival declines as a function of lamprey abundance.
 
 We calculated the utility of each action, $a$, using the dynamical system model (Equations 1-7) under all combinations of functional response and parasitism uncertainty, $F$ and $P$. Here, $U(a, f, p)$ is the utility associated with taking action $a$ assuming $f \in F$ and $p \in P$. The set $F$ corresponds to 1000 randomly selected samples from the MSFR model posterior distribution, and the set $P$ corresponds to three values of $D_S$ (Equation 7) with equal prior probability (Figure 2, Table S1). The utility, or the equilibrium salmon return abundance ($\hat{R}_S$), was calculated through simulation, starting at an arbitrary abundance of salmon and lamprey returns, $R_S$ and $R_L$, and finding the mean salmon return abundance, $\hat{R}_S$, after removing transient dynamics.
 
-\subsubsection{Value of Information}
+\subsubsection*{Value of Information}
 
 We then used a Value of Information analysis to calculate the value of lamprey information. In classical decision theory, the expected value of perfect information (EVPI), is the difference between the expected value of an optimal action after new information has been collected and the expected value of an optimal action before new information has been collected:
 
