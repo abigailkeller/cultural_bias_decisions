@@ -235,7 +235,7 @@ LPS_model <- nimbleCode({
 
 We fit the MSFR model in a Bayesian framework using NIMBLE v.1.3.0 [@de2017programming]. To enable convergence, the model was fit sequentially, where the beta distribution shape parameters, $\alpha^D$ and $\beta^D$, informing the probability of lamprey detection in daytime visual counts, $p^D$, (Equation 13) were fit first using data, $C_d^V$ and $C_d^T$. The median posterior values for $\alpha^D$ and $\beta^D$ were then used to fit the rest of the MSFR model.
 
-For MSFR model fitting, available prey abundance, $S^A_t$ and $L^A_t$, was rescaled by a factor of 10000 so that abundance would range from 0 to ~1 to assist numerical performance and convergence [@ransijn2021integrating]. We used vague priors for all parameters, which are provided in Appendix 1.1.1. Parameters were estimated by running four Markov chain Monte Carlo (MCMC) chains of 50 000 000 iterations, thinned by a factor of 10 000. Of these 5 000 samples, 200 were discarded as burn-in. We used visual inspection of the MCMC chains and the Brooks and Gelman diagnostic $\hat{R}$ to assess model convergence, and we found that all parameters had an $\hat{R} \leq 1.1$ [@brooks1998general]. All analyses were conducted in R version 4.5.1 [@Rcore]. Posterior summaries, as well as convergence diagnostics and trace plots of model parameters can be found in Table S2 and Figure S2. 
+For MSFR model fitting, available prey abundance, $S^A_t$ and $L^A_t$, was rescaled by a factor of 10000 so that abundance would range from 0 to ~1 to assist numerical performance and convergence [@ransijn2021integrating]. We used vague priors for all parameters, which are provided in Appendix 1.1.1. Parameters were estimated by running four Markov chain Monte Carlo (MCMC) chains of 50 000 000 iterations, thinned by a factor of 10 000. Of these 5 000 samples, 200 were discarded as burn-in. We used visual inspection of the MCMC chains and the Brooks and Gelman diagnostic $\hat{R}$ to assess model convergence, and we found that all parameters had an $\hat{R} \leq 1.1$ [@brooks1998general]. All analyses were conducted in R version 4.5.1 [@Rcore]. Posterior summaries, as well as convergence diagnostics and trace plots of model parameters can be found in Table S1 and Figure S2. 
 
 ### MSFR model checking
 
@@ -322,40 +322,6 @@ params <- data.frame(
 colnames(params) <- c("parameter\nsymbol", "description", 
                       "parameter\nvalue", "source")
 ```
-
-**Table S1.** Summary of parameters used in dynamical model. The asterisk indicates that the parameter takes on many values.
-```{r, echo = FALSE}
-# Render table
-knitr::kable(
-  params,
-  escape = FALSE,
-  format = "latex",
-  booktabs = TRUE,
-  longtable = TRUE
-) %>%
-  kable_styling(latex_options = "hold_position") %>%
-  column_spec(2, width = "8cm") 
-```
-
-
-> $\textsuperscript{1}$ Parameter is estimated with data using the Bayesian multi-species functional response statistical model (Equations 8-18).
-
-> $\textsuperscript{2}$ Parameter is treated as the decision maker's action, and therefore takes on many values.
-
-> $\textsuperscript{3}$ The salmon production parameter and carrying capacity are chosen such that the equilibrium salmon abundance at low lamprey production (~120,000, Figure 4A) is similar to the observed mean abundance of salmon entering Bonneville dam (Figure S8). Lamprey carrying capacity is chosen to be equal to salmon carrying capacity.
-
-> $\textsuperscript{4}$ Research on the adult Pacific lamprey parasitic phase remains sparse, with little consensus on the relationship between Pacific lamprey abundance and survival of Pacific salmon in their marine phase. Pacific salmon are well-documented hosts of Pacific lampreys, evidenced by observations of Pacific lampreys in catch and inflicted wounds on hosts [@beamish1980adult]. Murauskas et al. 2013 found a statistically significant relationship between marine abundance indicators of Chinook salmon and Pacific lamprey adult returns to the Columbia River, concluding that abundance of host species is the leading contributor Pacific lamprey ocean survival, characteristic of a predator-prey relationship [@murauskas2013relationships]. The authors suggest that Pacific lampreys may be an overlooked and substantial predator of marine fish, yet the magnitude of this predation is not quantified. Additionally, Weitkamp et al. 2015 examined host selection of multiple lamprey species in the Columbia River estuary, and while around 1% of Chinook salmon exhibited lamprey wounds, these wounds were attributed to River lamprey, rather than Pacific lamprey [@weitkamp2015seasonal]. These results, however, may reflect the behavior of Pacific lamprey as they migrate through the estuary, rather than their behavior in the ocean.
-
-> To reflect uncertainty in the magnitude of Pacific lamprey predation on Chinook salmon, we choose parameter values for $D_S$ that range from no impact on Chinook salmon ocean survival ($D_S = 9e7$, Figure 2) to a relatively high impact on Chinook salmon ocean survival that decreases ocean survival by 2% at high lamprey abundance ($D_S = 3e6$, Figure 2).
-
-> $\textsuperscript{5}$ Murauskas et al. 2013 found that the abundance of host species is the leading contributor Pacific lamprey ocean survival. The parameter value for $D_L$ is chosen to reflect a scenario where lamprey survival increases rapidly as a function of salmon density (Figure S9) [@murauskas2013relationships].
-
-> $\textsuperscript{6}$ The parameter value is chosen based on two sources: 1) the Columbia River Chinook salmon smolt-to-adult ratio in Bonneville dam from the DART database and 2) the survival rate of adult spring-run Chinook salmon from the mouth of the Columbia River estuary to Bonneville dam, estimated using passive integrated transponder tags [@wargo2019changes] (Figure S10). The smolt-to-adult ratio, $R^\text{SAR}$, measures the proportion of salmon smolts that returned to Bonneville dam. This ratio is the product of the mortality rate in the ocean (from exiting dam as a smolt to entering the Columbia River as an adult, $\phi$) and the mortality rate in the estuary (from entering the Columbia River as an adult to entering Bonneville dam, $s^e$): $R^\text{SAR} = \phi \times s^e$. To isolate just the mortality rate in the ocean, we divide the mean $R^\text{SAR}$ across years 2003 - 2024 by the mortality rate in the estuary estimated by Wargo Rub et al., 2019 in years 2010 - 2015 (Figure S10). The value for $\phi$ is shared between salmon and lamprey, as their ocean survival is documented to be highly correlated due to shared environmental conditions [@murauskas2013relationships].
-
-> $\textsuperscript{7}$ While the abundance of California sea lions in the Columbia River varies from year to year, we inform $P$, the annual CSL abundance in the Columbia River estuary (daily abundance $\times$ number of days), using estimates of CSL abundance made by Hatch et al. 2018 (Figure 5 in report). The authors estimated abundance based on boat surveys across four zones from the mouth of the Columbia River to Bonneville dam each week from the beginning of March to mid-May [@hatch2018sealion]. We use a conservative estimate of $P = 10000$ lower than the estimated CSL abundance, recognizing that the CSL prey attack rate estimated in our analysis using the diet of CSLs euthanized at Bonneville dam is likely higher than other locations in the estuary, as the fish are easier to attack at they enter the dam passage structures.
-
-\newpage
-
 
 ```{r, echo = FALSE, results = "hide"}
 # create functions
@@ -496,7 +462,7 @@ colnames(posterior_final) <- c("parameter", "mean", "sd",
                                "95 CI", "Rhat", "ESS")
 ```
 
-**Table S2.** Posterior summaries of the estimated parameters in the multi-species functional response (MSFR) model. Summaries including the mean, standard deviation, 95% credibility interval (highest density interval), $\hat{R}$, and effective sample size for the MSFR parameters and estimates of available prey, $A_t = \{L_t^A, S_t^A\}$ (Equations 17-18). Trace plots of posterior samples can be found in Figure S2.
+**Table S1.** Posterior summaries of the estimated parameters in the multi-species functional response (MSFR) model. Summaries including the mean, standard deviation, 95% credibility interval (highest density interval), $\hat{R}$, and effective sample size for the MSFR parameters and estimates of available prey, $A_t = \{L_t^A, S_t^A\}$ (Equations 17-18). Trace plots of posterior samples can be found in Figure S2.
 
 ```{r, echo = FALSE}
 # Process the table for parsed text
@@ -533,8 +499,41 @@ final_df <- gastro_CSL[, c(2, 1, 3)]
 colnames(final_df) <- c("t", "date", "N")
 ```
 
+**Table S2.** Summary of parameters used in dynamical model. The asterisk indicates that the parameter takes on many values.
+```{r, echo = FALSE}
+# Render table
+knitr::kable(
+  params,
+  escape = FALSE,
+  format = "latex",
+  booktabs = TRUE,
+  longtable = TRUE
+) %>%
+  kable_styling(latex_options = "hold_position") %>%
+  column_spec(2, width = "8cm") 
+```
 
-**Table S3.** Dates of California sea lion euthanasia and gastro-intestinal analysis. The date, $t$, corresponds to $t$ in the above Table S2, and $N$ corresponds to the number of euthanized CSL individuals at time $t$.
+
+> $\textsuperscript{1}$ Parameter is estimated with data using the Bayesian multi-species functional response statistical model (Equations 8-18).
+
+> $\textsuperscript{2}$ Parameter is treated as the decision maker's action, and therefore takes on many values.
+
+> $\textsuperscript{3}$ The salmon production parameter and carrying capacity are chosen such that the equilibrium salmon abundance at low lamprey production (~120,000, Figure 4A) is similar to the observed mean abundance of salmon entering Bonneville dam (Figure S8). Lamprey carrying capacity is chosen to be equal to salmon carrying capacity.
+
+> $\textsuperscript{4}$ Research on the adult Pacific lamprey parasitic phase remains sparse, with little consensus on the relationship between Pacific lamprey abundance and survival of Pacific salmon in their marine phase. Pacific salmon are well-documented hosts of Pacific lampreys, evidenced by observations of Pacific lampreys in catch and inflicted wounds on hosts [@beamish1980adult]. Murauskas et al. 2013 found a statistically significant relationship between marine abundance indicators of Chinook salmon and Pacific lamprey adult returns to the Columbia River, concluding that abundance of host species is the leading contributor Pacific lamprey ocean survival, characteristic of a predator-prey relationship [@murauskas2013relationships]. The authors suggest that Pacific lampreys may be an overlooked and substantial predator of marine fish, yet the magnitude of this predation is not quantified. Additionally, Weitkamp et al. 2015 examined host selection of multiple lamprey species in the Columbia River estuary, and while around 1% of Chinook salmon exhibited lamprey wounds, these wounds were attributed to River lamprey, rather than Pacific lamprey [@weitkamp2015seasonal]. These results, however, may reflect the behavior of Pacific lamprey as they migrate through the estuary, rather than their behavior in the ocean.
+
+> To reflect uncertainty in the magnitude of Pacific lamprey predation on Chinook salmon, we choose parameter values for $D_S$ that range from no impact on Chinook salmon ocean survival ($D_S = 9e7$, Figure 2) to a relatively high impact on Chinook salmon ocean survival that decreases ocean survival by 2% at high lamprey abundance ($D_S = 3e6$, Figure 2).
+
+> $\textsuperscript{5}$ Murauskas et al. 2013 found that the abundance of host species is the leading contributor Pacific lamprey ocean survival. The parameter value for $D_L$ is chosen to reflect a scenario where lamprey survival increases rapidly as a function of salmon density (Figure S9) [@murauskas2013relationships].
+
+> $\textsuperscript{6}$ The parameter value is chosen based on two sources: 1) the Columbia River Chinook salmon smolt-to-adult ratio in Bonneville dam from the DART database and 2) the survival rate of adult spring-run Chinook salmon from the mouth of the Columbia River estuary to Bonneville dam, estimated using passive integrated transponder tags [@wargo2019changes] (Figure S10). The smolt-to-adult ratio, $R^\text{SAR}$, measures the proportion of salmon smolts that returned to Bonneville dam. This ratio is the product of the mortality rate in the ocean (from exiting dam as a smolt to entering the Columbia River as an adult, $\phi$) and the mortality rate in the estuary (from entering the Columbia River as an adult to entering Bonneville dam, $s^e$): $R^\text{SAR} = \phi \times s^e$. To isolate just the mortality rate in the ocean, we divide the mean $R^\text{SAR}$ across years 2003 - 2024 by the mortality rate in the estuary estimated by Wargo Rub et al., 2019 in years 2010 - 2015 (Figure S10). The value for $\phi$ is shared between salmon and lamprey, as their ocean survival is documented to be highly correlated due to shared environmental conditions [@murauskas2013relationships].
+
+> $\textsuperscript{7}$ While the abundance of California sea lions in the Columbia River varies from year to year, we inform $P$, the annual CSL abundance in the Columbia River estuary (daily abundance $\times$ number of days), using estimates of CSL abundance made by Hatch et al. 2018 (Figure 5 in report). The authors estimated abundance based on boat surveys across four zones from the mouth of the Columbia River to Bonneville dam each week from the beginning of March to mid-May [@hatch2018sealion]. We use a conservative estimate of $P = 10000$ lower than the estimated CSL abundance, recognizing that the CSL prey attack rate estimated in our analysis using the diet of CSLs euthanized at Bonneville dam is likely higher than other locations in the estuary, as the fish are easier to attack at they enter the dam passage structures.
+
+\newpage
+
+
+**Table S3.** Dates of California sea lion euthanasia and gastro-intestinal analysis. The date, $t$, corresponds to $t$ in the above Table S1, and $N$ corresponds to the number of euthanized CSL individuals at time $t$.
 
 ```{r, echo = FALSE}
 # Render table
