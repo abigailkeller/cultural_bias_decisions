@@ -518,7 +518,7 @@ knitr::kable(
 
 > $\textsuperscript{2}$ Parameter is treated as the decision maker's action, and therefore takes on many values.
 
-> $\textsuperscript{3}$ The salmon production parameter and carrying capacity are chosen such that the equilibrium salmon abundance at low lamprey production (~120,000, Figure 4A) is similar to the observed mean abundance of salmon entering Bonneville dam (Figure S8). Lamprey carrying capacity is chosen to be equal to salmon carrying capacity.
+> $\textsuperscript{3}$ The salmon production parameter and carrying capacity are chosen such that the equilibrium salmon abundance at low lamprey production (~120,000, Figure 4A) is similar to the observed mean abundance of spring Chinook salmon entering Bonneville dam (Figure S8). Lamprey carrying capacity is chosen to be equal to salmon carrying capacity.
 
 > $\textsuperscript{4}$ Research on the adult Pacific lamprey parasitic phase remains sparse, with little consensus on the relationship between Pacific lamprey abundance and survival of Pacific salmon in their marine phase. Pacific salmon are well-documented hosts of Pacific lampreys, evidenced by observations of Pacific lampreys in catch and inflicted wounds on hosts [@beamish1980adult]. Murauskas et al. 2013 found a statistically significant relationship between marine abundance indicators of Chinook salmon and Pacific lamprey adult returns to the Columbia River, concluding that abundance of host species is the leading contributor Pacific lamprey ocean survival, characteristic of a predator-prey relationship [@murauskas2013relationships]. The authors suggest that Pacific lampreys may be an overlooked and substantial predator of marine fish, yet the magnitude of this predation is not quantified. Additionally, Weitkamp et al. 2015 examined host selection of multiple lamprey species in the Columbia River estuary, and while around 1% of Chinook salmon exhibited lamprey wounds, these wounds were attributed to River lamprey, rather than Pacific lamprey [@weitkamp2015seasonal]. These results, however, may reflect the behavior of Pacific lamprey as they migrate through the estuary, rather than their behavior in the ocean.
 
@@ -886,7 +886,7 @@ ppc$data <- c("$F_{t,j}$", "$S_t^P$", "$L_t^P\\quad \\text{for} \\quad t \\in \\
 colnames(ppc) <- c("Discrepancy", "Data Type", "P-value")
 ```
 
-**Table S7.** Posterior predictive p-values for each discrepancy test statistic and data type ($F_{t,j}$, count of consumed salmon and lamprey by each sea lion individual $j$; $S_t^P$, observed count of salmon passing through the fish ladders in time window $t; $L_t^P \text{ for } t \in \lambda^E$, observed count of lamprey passing through all passage structures (LPS + fish ladders) during time windows where lamprey night-time and LPS counts were recorded; $L_t^P \text{ for } t \in \lambda^I$, observed count of lamprey passing through all lamprey passage structures (LPS) during time windows where lamprey night-time and LPS counts were not recorded).
+**Table S7.** Posterior predictive p-values for each discrepancy test statistic and data type ($F_{t,j}$, count of consumed salmon and lamprey by each sea lion individual $j$; $S_t^P$, observed count of salmon passing through the fish ladders in time window $t$; $L_t^P \text{ for } t \in \lambda^E$, observed count of lamprey passing through all passage structures (LPS + fish ladders) during time windows where lamprey night-time and LPS counts were recorded; $L_t^P \text{ for } t \in \lambda^I$, observed count of lamprey passing through all lamprey passage structures (LPS) during time windows where lamprey night-time and LPS counts were not recorded).
 
 ```{r, echo = FALSE}
 # Render table
@@ -1008,7 +1008,7 @@ knitr::include_graphics(
 )
 ```
 
-**Figure S1.** Count of Chinook salmon and Pacific lamprey passing through Bonneville dam fish windows in April to mid-June from **A.** 1946 - 1969 and **B.** 1999 - 2024. Pacific lamprey counts were not recorded from 1970 - 1998. Solid line indicates the mean count across years, and shaded area indicates $\pm$ 0.5 standard deviation from the mean.
+**Figure S1.** Count of spring Chinook salmon and Pacific lamprey passing through Bonneville dam fish windows in April to mid-June from **A.** 1946 - 1969 and **B.** 1999 - 2024. Pacific lamprey counts were not recorded from 1970 - 1998. Solid line indicates the mean count across years, and shaded area indicates $\pm$ 0.5 standard deviation from the mean.
 
 \newpage
 
