@@ -1,13 +1,57 @@
 ---
-title: "Supporting Information"
 output:
   pdf_document:
-    toc: true
+    toc: false
     toc_depth: 2
     number_sections: true
-    extra_dependencies: ["array", "longtable", "booktabs"]
+    extra_dependencies: ["array", "longtable", "booktabs", "authblk"]
 bibliography: lamprey_refs.bib
 ---
+
+\begin{center}
+\includegraphics[width=4cm]{pnas_logo.png}
+\end{center}
+
+\vspace{1em}
+
+\begin{Large}
+\textbf{Supporting Information for} \\ 
+Quantifying the cost of cultural bias in conservation decision making
+\end{Large}
+
+\vspace{1.5em}
+
+Abigail G. Keller^1,\*^, Daniel K. Okamoto^2^, Kristin P. Davis^1,3,4^, Michael C. Runge^5^, Carl Boettiger^1,4^
+
+<small>
+
+^**1**^ Department of Environment Science, Policy, and Management, University of California, Berkeley, Berkeley, California, USA  
+^**2**^ Department of Integrative Biology, University of California, Berkeley, Berkeley, California, USA  
+^**3**^ Stone Center for Environmental Stewardship  
+^**4**^ Eric & Wendy Schmidt Center for Data Science and Environment, University of California, Berkeley  
+^**5**^ U.S. Geological Survey, Eastern Ecological Science Center at the Patuxent Research Refuge, Laurel, Maryland, USA  
+^\*^ Corresponding author: Abigail G. Keller, agkeller@berkeley.edu
+
+</small>
+
+\vspace{1.5em}
+
+\vspace{1.5em}
+
+**This PDF file includes:**
+
+\begin{quote}
+Supporting text \\
+Tables S1 to S9 \\
+Figures S1 to S12 \\
+SI References
+\end{quote}
+
+
+```{r setup, include=FALSE}
+library(knitr)
+options(knitr.table.format = "latex")
+```
 
 ```{r, echo = FALSE, warning = FALSE, message = FALSE}
 library(tidyverse)
@@ -21,7 +65,7 @@ library(kableExtra)
 
 \newpage
 
-# Supporting Information Text
+# Supporting text
 
 ## Multi-species functional response (MSFR) model
 
@@ -1305,4 +1349,4 @@ plot_3day
 
 **Figure S12.** Multi-species functional response (MSFR) model fits of sensitivity analysis with 1000 randomly selected posterior samples using the posterior from the **A.** 3-day time window (main analysis results), **B.** 4-day time window, and **C.** 5-day time window.
 
-# References
+# SI References
