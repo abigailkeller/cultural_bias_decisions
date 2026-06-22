@@ -2,20 +2,19 @@
 output:
   pdf_document:
     toc: false
-    toc_depth: 2
+    toc_depth: 3
     number_sections: true
     extra_dependencies: ["array", "longtable", "booktabs", "authblk"]
 bibliography: lamprey_refs.bib
 ---
 
-\begin{center}
-\includegraphics[width=4cm]{pnas_logo.png}
-\end{center}
-
 \vspace{1em}
 
 \begin{Large}
-\textbf{Supporting Information for} \\ 
+\textbf{Supporting Information} \\ 
+
+\vspace{1em}
+
 Quantifying the cost of cultural bias in conservation decision making
 \end{Large}
 
@@ -34,18 +33,8 @@ Abigail G. Keller^1,\*^, Daniel K. Okamoto^2^, Kristin P. Davis^1,3,4^, Michael 
 
 </small>
 
-\vspace{1.5em}
 
-\vspace{1.5em}
-
-**This PDF file includes:**
-
-\begin{quote}
-Supporting text \\
-Tables S1 to S9 \\
-Figures S1 to S12 \\
-SI References
-\end{quote}
+\tableofcontents
 
 
 ```{r setup, include=FALSE}
