@@ -56,11 +56,85 @@ library(kableExtra)
 
 # Supporting text
 
-## Multi-species functional response (MSFR) model
+## Quantifying uncertainty in the multi-species functional response (MSFR)
+
+### MSFR model formulation
+
+Below we outline the Bayesian model formulation used to estimate the multi-species functional response (MSFR) parameters (Equations 1-2) using California sea lion gastro-intestinal diet data and fish count data at Bonneville dam (Tables S3-S6). The Bonneville dam counting systems were originally designed to count Pacific salmon returning to freshwater, with day-time visual counts in fish windows as the primary mechanism of observation (Figure 2). Observation error between the two fish species therefore differs; while Chinook salmon migrate during the day, Pacific lamprey tend to migrate at night and make use of alternate passage routes through lamprey passage structures (LPS). Night-time visual counts in fish windows and LPS mechanical counts were only recorded in a subset of years in this analysis, so the remaining years therefore undercount the number of passing Pacific lamprey since only day-time visual counts were recorded. More information on data sources and model fitting can be found in Supporting Information.
+
+#### Chinook salmon prey abundance
+
+The observed number of Chinook salmon passing through the Bonneville dam fish ladders in time window, $t$, $S^P_{t}$, is drawn from a Poisson distribution with $\widetilde{S^P_{t}}$ representing the expected number of salmon passed (Table S3):
+
+$$
+S^P_{t} \sim \text{Poisson}(\widetilde{S^P_{t}})
+$$
+
+The number of salmon available for sea lion consumption, $S^A_t$ is greater than the number of salmon passing through the dam, as the dam passage efficiency is less than one. The expected number of salmon passed, $\widetilde{S^P_t}$, is therefore drawn from a Binomial distribution with the size as the difference between the number of salmon available for consumption, $S^A_t$, and the total number of salmon consumed across all euthanized sea lion individuals at time $t$, $\sum^{O_t}_{j=1}{F^S_{t, j}}$. Here, $O_t$ is the total number of individuals euthanized at time $t$, and $F^S_{t,j}$ is the number of Chinook salmon enumerated in the digestive tract of sea lion individual, $j$. The probability is the salmon passage efficiency at Bonneville dam, $p_S$, [@frick2008adult]:
+
+$$
+\widetilde{S^P_t} \sim \text{Binomial}(S^A_t - \sum^{O_t}_{j=1}{F^S_{t, j}},p_S)
+$$
+
+#### Pacific lamprey prey abundance
+
+In the years 2017 and 2019 when the lamprey night-time and LPS counts were recorded, the observed number of lamprey passing through all passage structures (LPS + fish ladders) in time window $t$, $L^P_t$, is drawn from a Poisson distribution with $\widetilde{L^P_t}$ representing the expected number of lamprey passed (Table S3):
+
+$$
+L^P_t \sim \text{Poisson}(\widetilde{L^P_t})\qquad \text{for } t \in \lambda^E
+$$ 
+where $\lambda^E$ represents the set of time windows associated with sea lion euthanasia in 2017 or 2019.
+
+In the years when the lamprey night-time and LPS counts were not recorded, the observed number of lamprey passing through all passage structures, $L^P_t$, is drawn from a Binomial distribution, with the size parameter as the expected number of lamprey passed, $\widetilde{L^P_t}$, and probability of detection in day-time visual counts, $p^D_t$ (Table S3):
+
+$$
+L^P_t \sim \text{Binomial}(\widetilde{L^P_t}, p^D_t) \qquad \text{for } t \in \lambda^I
+$$ 
+where $\lambda^I$ represents the set of time windows associated with sea lion euthanasia in 2018 or 2021-2023.
+
+The probability of detection in day-time visual counts during the time window $t$, $p^D_t$, is drawn from a Beta distribution:
+
+$$
+p^D_t \sim \text{Beta}(\alpha^D, \beta^D) \qquad \text{for } t \in \lambda^I
+$$
+
+These beta distribution hyperparameters were informed by the passed lamprey recorded via visual count, $C_d^V$, and the total recorded passed lamprey across all passage structures and all times of day, $C_d^T$, for each monitored three-day interval, $d$, in 2017 and 2019 (Table S4, Figure S7). $C_d^V / C_d^T$ therefore represents the fraction of all passed lamprey that were visually counted during the day:
+
+$$
+C_d^V / C_d^T \sim \text{Beta}(\alpha^D, \beta^D)
+$$
+
+The number of lamprey available for sea lion consumption, $L^A_t$ is greater than the number of lamprey passing through the dam, as the dam passage efficiency is less than one. The expected number of lamprey passed, $\widetilde{L^P_t}$, is drawn from a Binomial distribution with the size as the difference between the number of lamprey available for consumption, $L^A_t$, and the number of lamprey consumed across all euthanized sea lion individuals at time $t$, $\sum^{O_t}_{j=1}{F^L_{t, j}}$. Here, $F^L_{t,j}$ is the number of lamprey enumerated in the digestive tract of sea lion individual, $j$. The probability is the lamprey passage efficiency at Bonneville dam, $p_L$, [@moser2002passage]:
+
+$$
+\widetilde{L^P_t} \sim \text{Binomial}(L^A_t - \sum^{O_t}_{j=1}{F^L_{t, j}},p_L)
+$$
+
+#### Consumed prey
+The number of prey consumed by each sea lion individual is likely to deviate from the expected number of prey consumed due to heterogeneity in preference and behavior across sea lion individuals. Model process error is therefore incorporated as Poisson-distributed variation in sea lion consumption rates. The observed number of Chinook salmon and Pacific lamprey consumed by sea lion individual $j$, $F^S_{t,j}$ and $F^L_{t,j}$, respectively, is drawn from a Poisson distribution with the expected number of prey consumed, $\widetilde{F^S_{t}}$ and $\widetilde{F^L_{t}}$, as the rate parameters, respectively (Table S5):
+
+$$
+F^S_{t, j} \sim \text{Poisson}(\widetilde{F^S_{t}})
+$$
+$$
+F^L_{t, j} \sim \text{Poisson}(\widetilde{F^L_{t}})
+$$
+
+#### Multi-species functional response (MSFR)
+
+The expected number of prey consumed, $\widetilde{F_{i,t}}$, of species $i$ is related to the available number of prey, $A_{i,t} = \{S^A_{t}, L^A_{t}\}$, using the MSFR described in Equations 1-2.
+
+$$
+\widetilde{F_{i,t}} = \frac{a_{i,t}A_{i,t}}{1+\sum_{k=1}^{m}a_{k,t}h_kA_{k,t}}    
+$$  
+
+$$
+a_{i,t} = b_iA_{i,t}^q    
+$$
 
 ### MSFR model prior distributions
 
-Below are the vague prior distributions used for MSFR model parameters. To help with model convergence, we estimate the attack rate, $b_i$, on the log scale. Since a uniform prior on the log-transformed scale is no longer uniform on the real scale, we conduct a prior sensitivity analysis for the $\text{log}(b_i)$ prior (section 1.1.6).
+Below are the vague prior distributions used for MSFR model parameters. To help with model convergence, we estimate the attack rate, $b_i$, on the log scale. Since a uniform prior on the log-transformed scale is no longer uniform on the real scale, we conduct a prior sensitivity analysis for the $\text{log}(b_i)$ prior (section 1.1.7).
 
 Handling time of species $i$:
 
@@ -106,21 +180,21 @@ $$
 
 ### MSFR data sources
 
-Here we outline the data sources used to fit the multi-species functional response model (MSFR, Equations 8-18). The model uses two sources of data: 1) gastro-intestinal consumption data from 107 euthanized California sea lions (CSL) and 2) Bonneville dam passage data from day-time visual counts in fish ladders, night-time visual counts in fish ladders, and mechanical counts in lamprey passage structures (LPS). The dam passage data is used to inform both 1) the observed abundance of fish passed, $L^P_t$ and $S^P_t$, during the time window, $t$ sea lion euthanasia occurred and 2) the probability of lamprey detection in day-time visual counts in fish ladders. 
+Here we outline the data sources used to fit the multi-species functional response model (MSFR, Section 1.1.1). The model uses two sources of data: 1) gastro-intestinal consumption data from 107 euthanized California sea lions (CSL) and 2) Bonneville dam passage data from day-time visual counts in fish ladders, night-time visual counts in fish ladders, and mechanical counts in lamprey passage structures (LPS). The dam passage data is used to inform both 1) the observed abundance of fish passed, $L^P_t$ and $S^P_t$, during the time window, $t$ sea lion euthanasia occurred and 2) the probability of lamprey detection in day-time visual counts in fish ladders. 
 
-To estimate CSL consumption rates, we use data on prey items recovered in the gastro-intestinal tracks of 107 California sea lions euthanized below Bonneville dam in 2017-2019 and 2021-2023 (Table S3, Table S6). This diet analysis is based on the identification of undigested prey remains from the stomachs and large intestines of euthanized CSLs following the procedures in Lance et al. (2001), where prey were enumerated by examining all structures (otoliths, tail structures, cephalopod beaks, etc.) to determine the minimum number of individual prey items in the sample [@lance2001pinniped]. These data were retrieved from annual reports to the National Marine Fisheries Service (NMFS) documenting compliance with the terms and conditions of the authorization for lethal removal of California sea lions under the Marine Mammal Protection Act [@clark2021pinniped; @edwards2022columbia; @clark2023columbia]. 
+To estimate CSL consumption rates, we use data on prey items recovered in the gastro-intestinal tracks of 107 California sea lions euthanized below Bonneville dam in 2017-2019 and 2021-2023 (Table S2, Table S5). This diet analysis is based on the identification of undigested prey remains from the stomachs and large intestines of euthanized CSLs following the procedures in Lance et al. (2001), where prey were enumerated by examining all structures (otoliths, tail structures, cephalopod beaks, etc.) to determine the minimum number of individual prey items in the sample [@lance2001pinniped]. These data were retrieved from annual reports to the National Marine Fisheries Service (NMFS) documenting compliance with the terms and conditions of the authorization for lethal removal of California sea lions under the Marine Mammal Protection Act [@clark2021pinniped; @edwards2022columbia; @clark2023columbia]. 
 
 While above-surface pinniped predation events are monitored at Bonneville dam and have previously been used to estimate the CSL functional response for salmonid prey [@hatch2018sealion], these above-surface data likely underestimate lamprey predation, as lamprey predation typically occurs below surface [@tidwell2023pinniped]. We therefore use the gastro-intestinal data to reduce differences in consumption observation error between fish species. We subset the prey item data to those identified as adult Chinook salmon and Pacific lamprey, and we assume the prey items represent consumption in the 24 hours before euthanasia, as this is the time typically taken for CSL prey to pass through the digestive system (Tidwell, personal communication).
 
-To estimate the abundance of the prey available to CSL during the period of consumption, $L_t^A$ and $S_t^A$, we use fish passage data from Bonneville dam. For Chinook salmon, these data include daily, visual daytime counts across all Bonneville dam fish ladders, retrieved from the Columbia River DART database (https://www.cbr.washington.edu/dart/query/adult_graph_text). For Pacific lamprey, however, these visual daytime counts in the fish ladders underestimate abundance, as 1) Pacific lamprey also use Lamprey Passage Structures (LPS) in addition to the fish ladders and 2) lamprey tend to migrate at night, rather than during the day [@cates2020lamprey] (Figure 2). These lamprey passage structures (LPS) use a mechanical counting system, where the fish moves a paddle and the attached ferrous tab as they exit the system, which is detected by a proximity detector and sends a voltage pulse [@cates2020lamprey]. In 2017 and 2019, mechanical counts of Pacific lamprey in five LPS and visual nighttime counts in the fish ladders were recorded and available through the Fish Passage Center database (https://www.fpc.org/webapps/adultsalmon/Q_adultcounts_lamprey_dataquery.php). We use these data to estimate the probability of detecting lamprey during daytime visual counts in the remaining years (2018, 2021-2023) (Table S4).
+To estimate the abundance of the prey available to CSL during the period of consumption, $L_t^A$ and $S_t^A$, we use fish passage data from Bonneville dam. For Chinook salmon, these data include daily, visual daytime counts across all Bonneville dam fish ladders, retrieved from the Columbia River DART database (https://www.cbr.washington.edu/dart/query/adult_graph_text). For Pacific lamprey, however, these visual daytime counts in the fish ladders underestimate abundance, as 1) Pacific lamprey also use Lamprey Passage Structures (LPS) in addition to the fish ladders and 2) lamprey tend to migrate at night, rather than during the day [@cates2020lamprey] (Figure 2). These lamprey passage structures (LPS) use a mechanical counting system, where the fish moves a paddle and the attached ferrous tab as they exit the system, which is detected by a proximity detector and sends a voltage pulse [@cates2020lamprey]. In 2017 and 2019, mechanical counts of Pacific lamprey in five LPS and visual nighttime counts in the fish ladders were recorded and available through the Fish Passage Center database (https://www.fpc.org/webapps/adultsalmon/Q_adultcounts_lamprey_dataquery.php). We use these data to estimate the probability of detecting lamprey during daytime visual counts in the remaining years (2018, 2021-2023) (Table S3).
 
 The observed number of salmon and lamprey passing through the dam, $S_t^P$ and $L_t^P$ respectively, is paired with the time point $t$ of California sea lion (CSL) euthanasia. To pair these data, we take the sum of fish passing through the dam during a time window surrounding the date of euthanasia, $t$. This time window accounts for a time lag in both 1) the passage of fish remains through the body of the California sea lion (CSL) and 2) movement of fish from the entrance of the dam as prey to their moment of observation through the fish windows or lamprey passage structures (LPS) (See "Dam count data sensitivity analysis" below, Figure S11).
 
-For our main analysis, we chose a three-day time window to calculate $S_t^P$ and $L_t^P$ (one day before the date of CSL euthanasia to one day following the date of CSL euthanasia). To assess the sensitivity of our results to the selection of this time window, we conducted a sensitivity analysis with a four-day time window (one day before the date of CSL euthanasia to two days following the date of euthanasia) and a five-day time window (one day before the date of CSL euthanasia to three days following the date of euthanasia) (Table S6).
+For our main analysis, we chose a three-day time window to calculate $S_t^P$ and $L_t^P$ (one day before the date of CSL euthanasia to one day following the date of CSL euthanasia). To assess the sensitivity of our results to the selection of this time window, we conducted a sensitivity analysis with a four-day time window (one day before the date of CSL euthanasia to two days following the date of euthanasia) and a five-day time window (one day before the date of CSL euthanasia to three days following the date of euthanasia) (Table S5).
 
 ### MSFR model code
 
-Below is the NIMBLE model code for MSFR model (Equations 8-12, 14-18) and for estimating the lamprey probability of detection by visual counts at Bonneville fish ladders (Equation 13).
+Below is the NIMBLE model code for MSFR model and for estimating the lamprey probability of detection by visual counts at Bonneville fish ladders.
 
 ```{r, eval = FALSE}
 
@@ -135,11 +209,9 @@ MSFR_model <- nimbleCode({
   
   for (t in 1:n_time) {
     
-    # Equation 8
     # get expected number of salmon passed
     S[t] ~ dpois(S_P[t])
     
-    # Equation 9
     # get expected number of salmon available
     S_P[t] ~ dbinom(size = round(S_A[t] - F_day[t, 2]), 
                     prob = salmon_PE)
@@ -148,7 +220,6 @@ MSFR_model <- nimbleCode({
   ########################
   # Lamprey prey abundance
   
-  # Equation 10
   # get expected number of available lamprey passed - exact years
   for (t in 1:n_exact) {
     L_exact[t] ~ dpois(L_P[t_exact[t]])
@@ -156,15 +227,15 @@ MSFR_model <- nimbleCode({
   
   # get expected number of available lamprey passed - inexact years
   for (t in 1:n_inexact) {
-    # Equation 11
+    
     L_inexact[t] ~ dbinom(size = L_P[t_inexact[t]], 
                           prob = p_D[t])
-    # Equation 12
+    
     p_D[t] ~ dbeta(alpha_D, beta_D)
   }
   
   for (t in 1:n_time) {
-    # Equation 14
+    
     # get expected number of lamprey available 
     L_P[t] ~ dbinom(size = round(L_A[t] - F_day[t, 1]), 
                     prob = lamprey_PE)
@@ -178,7 +249,6 @@ MSFR_model <- nimbleCode({
     
     for (i in 1:n_species) {
       
-      # Equations 15-16
       consumed[j, i] ~ dpois(F_exp[obs_ref[j], i]) 
       
     }
@@ -189,7 +259,6 @@ MSFR_model <- nimbleCode({
   
   for (t in 1:n_time) {
     
-    # Equations 17-18
     # expected number of prey consumed - function of available fish
     F_exp[t, 1:n_species] <- get_MSFR(L_A[t] / N_scale, 
                                       S_A[t] / N_scale, 
@@ -266,9 +335,9 @@ LPS_model <- nimbleCode({
 
 ### MSFR model fitting
 
-We fit the MSFR model in a Bayesian framework using NIMBLE v.1.3.0 [@de2017programming]. To enable convergence, the model was fit sequentially, where the beta distribution shape parameters, $\alpha^D$ and $\beta^D$, informing the probability of lamprey detection in daytime visual counts, $p^D$, (Equation 13) were fit first using data, $C_d^V$ and $C_d^T$. The median posterior values for $\alpha^D$ and $\beta^D$ were then used to fit the rest of the MSFR model.
+We fit the MSFR model in a Bayesian framework using NIMBLE v.1.3.0 [@de2017programming]. To enable convergence, the model was fit sequentially, where the beta distribution shape parameters, $\alpha^D$ and $\beta^D$, informing the probability of lamprey detection in daytime visual counts, $p^D$, were fit first using data, $C_d^V$ and $C_d^T$. The median posterior values for $\alpha^D$ and $\beta^D$ were then used to fit the rest of the MSFR model.
 
-For MSFR model fitting, available prey abundance, $S^A_t$ and $L^A_t$, was rescaled by a factor of 10000 so that abundance would range from 0 to ~1 to assist numerical performance and convergence [@ransijn2021integrating]. We used vague priors for all parameters, which are provided in Appendix 1.1.1. Parameters were estimated by running four Markov chain Monte Carlo (MCMC) chains of 50 000 000 iterations, thinned by a factor of 10 000. Of these 5 000 samples, 200 were discarded as burn-in. We used visual inspection of the MCMC chains and the Brooks and Gelman diagnostic $\hat{R}$ to assess model convergence, and we found that all parameters had an $\hat{R} \leq 1.1$ [@brooks1998general]. All analyses were conducted in R version 4.5.1 [@Rcore]. Posterior summaries, as well as convergence diagnostics and trace plots of model parameters can be found in Table S1 and Figure S2. 
+For MSFR model fitting, available prey abundance, $S^A_t$ and $L^A_t$, was rescaled by a factor of 10000 so that abundance would range from 0 to ~1 to assist numerical performance and convergence [@ransijn2021integrating]. We used vague priors for all parameters, which are provided in Section 1.1.2. Parameters were estimated by running four Markov chain Monte Carlo (MCMC) chains of 50 000 000 iterations, thinned by a factor of 10 000. Of these 5 000 samples, 200 were discarded as burn-in. We used visual inspection of the MCMC chains and the Brooks and Gelman diagnostic $\hat{R}$ to assess model convergence, and we found that all parameters had an $\hat{R} \leq 1.1$ [@brooks1998general]. All analyses were conducted in R version 4.5.1 [@Rcore]. Posterior summaries, as well as convergence diagnostics and trace plots of model parameters can be found in Table S6 and Figure S3. 
 
 ### MSFR model checking
 
@@ -318,7 +387,7 @@ The posterior distributions for $\text{log}(b_i)$ are insensitive to the three c
 
 For our main analysis, we chose a three-day time window to calculate $S_t^P$ and $L_t^P$ (one day before the date of California sea lion (CSL) euthanasia to one day following the date of CSL euthanasia). To assess the sensitivity of our results to the selection of this time window, we conducted a sensitivity analysis with a four-day time window (one day before the date of CSL euthanasia to two days following the date of euthanasia) and a five-day time window (one day before the date of CSL euthanasia to three days following the date of euthanasia) (Figure S11).
 
-We fit the same Bayesian multi-species functional response (MSFR) model described in Equations 8-12, 14-18 where the number of salmon and lamprey passing through the dam, $S_t^P$ and $L_t^P$, respectively, were calculated using the four-day and five-day time windows. We then compared the results of our main analysis (3-day time window) to the results with the four- and five-day time window by comparing the 1) MSFR parameter estimates (Table S9) and 2) MSFR model predictions calculated with the posterior samples (Figure S12).
+We fit the same Bayesian multi-species functional response (MSFR) model described in Section 1.1.1 where the number of salmon and lamprey passing through the dam, $S_t^P$ and $L_t^P$, respectively, were calculated using the four-day and five-day time windows. We then compared the results of our main analysis (3-day time window) to the results with the four- and five-day time window by comparing the 1) MSFR parameter estimates (Table S9) and 2) MSFR model predictions calculated with the posterior samples (Figure S12).
 
 With these results taken together, we conclude that although some parameter estimates change slightly (Table S9), the selection of time window has a negligible effect on the the MSFR model predictions.
 
@@ -495,27 +564,6 @@ colnames(posterior_final) <- c("parameter", "mean", "sd",
                                "95 CI", "Rhat", "ESS")
 ```
 
-**Table S1.** Posterior summaries of the estimated parameters in the multi-species functional response (MSFR) model. Summaries including the mean, standard deviation, 95% credibility interval (highest density interval), $\hat{R}$, and effective sample size for the MSFR parameters and estimates of available prey, $A_t = \{L_t^A, S_t^A\}$ (Equations 17-18). Trace plots of posterior samples can be found in Figure S2.
-
-```{r, echo = FALSE}
-# Process the table for parsed text
-posterior_final <- posterior_final %>%
-  mutate(parameter = paste0("$", parameter, "$"))
-
-# Render table
-knitr::kable(
-  posterior_final,
-  escape = FALSE,
-  format = "latex",
-  booktabs = TRUE,
-  longtable = TRUE
-) %>%
-  kable_styling(full_width = FALSE, latex_options = c("repeat_header")) %>%
-  kableExtra::row_spec(-1,
-                       extra_latex_after = "\\renewcommand{\\arraystretch}{2}")
-```
-\newpage
-
 ```{r, echo = FALSE, message = FALSE, warning=FALSE}
 # read in data
 gastro_CSL <- readRDS("../data/model_data/gastro_data.rds")
@@ -532,7 +580,7 @@ final_df <- gastro_CSL[, c(2, 1, 3)]
 colnames(final_df) <- c("t", "date", "N")
 ```
 
-**Table S2.** Summary of parameters used in dynamical model. The asterisk indicates that the parameter takes on many values.
+**Table S1.** Summary of parameters used in dynamical model. The asterisk indicates that the parameter takes on many values.
 ```{r, echo = FALSE}
 # Render table
 knitr::kable(
@@ -547,7 +595,7 @@ knitr::kable(
 ```
 
 
-> $\textsuperscript{1}$ Parameter is estimated with data using the Bayesian multi-species functional response statistical model (Equations 8-18).
+> $\textsuperscript{1}$ Parameter is estimated with data using the Bayesian multi-species functional response statistical model (Section 1.1.1).
 
 > $\textsuperscript{2}$ Parameter is treated as the decision maker's action, and therefore takes on many values.
 
@@ -566,7 +614,7 @@ knitr::kable(
 \newpage
 
 
-**Table S3.** Dates of California sea lion euthanasia and gastro-intestinal analysis. The date, $t$, corresponds to $t$ in the above Table S1, and $N$ corresponds to the number of euthanized CSL individuals at time $t$.
+**Table S2.** Dates of California sea lion euthanasia and gastro-intestinal analysis. The date, $t$, corresponds to $t$ in Table S6, and $N$ corresponds to the number of euthanized CSL individuals at time $t$.
 
 ```{r, echo = FALSE}
 # Render table
@@ -746,7 +794,7 @@ colnames(dates_df) <- c("t", "time window set", "$S^P$", "Day-time",
                         "Night-time", "$L^P$ (LPS)", "$L^P$ total")
 ```
 
-**Table S4.** Observed abundance of fish passed in Bonneville dam passage structures, where $t$ corresponds to the date of CSL euthanasia, time window set corresponds to the time window sets described in Equations 10 and 11, $S^P$ corresponds to the sum of Chinook salmon counted in visual, day-time fish ladders in the three-day time window, $L^P$ (Fish ladder) corresponds to the sum of Pacific lamprey counted in visual, day-time and night-time fish ladders in the three-day time window, $L^P$ (LPS) corresponds to the sum of Pacific lamprey counted in the three mechanical lamprey passage structures (LPS) in the three-day time window, and $L^P$ total corresponds to the total number of Pacific lamprey counted across all passage structures. "NR" indicates that the count of Pacific lamprey was not recorded in the associated passage structure in that time period.
+**Table S3.** Observed abundance of fish passed in Bonneville dam passage structures, where $t$ corresponds to the date of CSL euthanasia. Time window set refers to whether the observed count of lamprey includes LPS and night-time counts or not ($\lambda^E$ and $\lambda^I$, respectively). $S^P$ corresponds to the sum of Chinook salmon counted in visual, day-time fish ladders in the three-day time window, $L^P$ (Fish ladder) corresponds to the sum of Pacific lamprey counted in visual, day-time and night-time fish ladders in the three-day time window, $L^P$ (LPS) corresponds to the sum of Pacific lamprey counted in the three mechanical lamprey passage structures (LPS) in the three-day time window, and $L^P$ total corresponds to the total number of Pacific lamprey counted across all passage structures. "NR" indicates that the count of Pacific lamprey was not recorded in the associated passage structure in that time period.
 
 ```{r, echo = FALSE}
 header_top <- c(" " = 3, "$L^P$ (Fish ladder)" = 2, " " = 2)
@@ -861,7 +909,7 @@ combined_data_final <- combined_data_all[, c("date", "bi_day", "ws_day",
 combined_data_final$prop <- round(combined_data_final$prop, 2)
 ```
 
-**Table S5.** Counts of lamprey in 2017 and 2019 passing through fish passage structures at Bonneville dam, used to inform the probability of lamprey detection in day-time visual fish ladder counts. Counts include 1) visual day-time counts in Bradford Island (BI) and Washington Shores (WS) fish ladders, 2) visual night-time counts in BI and WS fish ladders, and 3) mechanical corrected counts in three lamprey passage structures (LPS): Bradford Island auxiliary water supply (BI-AWS), Washington shore fish ladder auxiliary water supply (WA-AWS), and Cascades Island entrance (CI-ENT). [@cates2020lamprey]. The column $C_V$ corresponds to the sum of visual day-time counts in the two fish ladders, and the column $C_T$ corresponds to the sum of counts across all structures. The proportion of lamprey observed by visual day-time counts ($C_V / C_T$) is used to inform beta distribution parameters, $\alpha_D$ and $\beta_D$ (Equation 13, Figure S7). Date corresponds to the first day of the three-day time interval. Counts were summed across this three-day time interval to account for day-to-day stochasticity. Time intervals were included if at least 20 total lamprey passed through all structures (i.e., $C_T > 20$).
+**Table S4.** Counts of lamprey in 2017 and 2019 passing through fish passage structures at Bonneville dam, used to inform the probability of lamprey detection in day-time visual fish ladder counts. Counts include 1) visual day-time counts in Bradford Island (BI) and Washington Shores (WS) fish ladders, 2) visual night-time counts in BI and WS fish ladders, and 3) mechanical corrected counts in three lamprey passage structures (LPS): Bradford Island auxiliary water supply (BI-AWS), Washington shore fish ladder auxiliary water supply (WA-AWS), and Cascades Island entrance (CI-ENT). [@cates2020lamprey]. The column $C_V$ corresponds to the sum of visual day-time counts in the two fish ladders, and the column $C_T$ corresponds to the sum of counts across all structures. The proportion of lamprey observed by visual day-time counts ($C_V / C_T$) is used to inform beta distribution parameters, $\alpha_D$ and $\beta_D$ (Figure S7). Date corresponds to the first day of the three-day time interval. Counts were summed across this three-day time interval to account for day-to-day stochasticity. Time intervals were included if at least 20 total lamprey passed through all structures (i.e., $C_T > 20$).
 
 ```{r, echo = FALSE}
 new_column_names <- c("Date", "BI", "WS", "BI", 
@@ -886,7 +934,7 @@ add_header_above(header_top)
 
 \newpage
 
-**Table S6.** Gastro-intestinal data of 107 euthanized California sea lions collected at 46 time points. The time window start and end correspond to the 3-day time window surrounding the date of CSL euthanasia used to calculate the abundance of passed fish through Bonneville dam.
+**Table S5.** Gastro-intestinal data of 107 euthanized California sea lions collected at 46 time points. The time window start and end correspond to the 3-day time window surrounding the date of CSL euthanasia used to calculate the abundance of passed fish through Bonneville dam.
 
 ```{r, echo = FALSE}
 # Render table
@@ -897,6 +945,29 @@ knitr::kable(
   booktabs = TRUE,
   longtable = TRUE
 )
+```
+
+\newpage
+
+
+**Table S6.** Posterior summaries of the estimated parameters in the multi-species functional response (MSFR) model. Summaries including the mean, standard deviation, 95% credibility interval (highest density interval), $\hat{R}$, and effective sample size for the MSFR parameters and estimates of available prey, $A_t = \{L_t^A, S_t^A\}$. Trace plots of posterior samples can be found in Figure S3.
+
+```{r, echo = FALSE}
+# Process the table for parsed text
+posterior_final <- posterior_final %>%
+  mutate(parameter = paste0("$", parameter, "$"))
+
+# Render table
+knitr::kable(
+  posterior_final,
+  escape = FALSE,
+  format = "latex",
+  booktabs = TRUE,
+  longtable = TRUE
+) %>%
+  kable_styling(full_width = FALSE, latex_options = c("repeat_header")) %>%
+  kableExtra::row_spec(-1,
+                       extra_latex_after = "\\renewcommand{\\arraystretch}{2}")
 ```
 
 \newpage
@@ -1043,14 +1114,24 @@ knitr::include_graphics(
 
 **Figure S1.** Count of spring Chinook salmon and Pacific lamprey passing through Bonneville dam fish windows in April to mid-June from **A.** 1946 - 1969 and **B.** 1999 - 2024. Pacific lamprey counts were not recorded from 1970 - 1998. Solid line indicates the mean count across years, and shaded area indicates $\pm$ 0.5 standard deviation from the mean.
 
+```{r, echo=FALSE, out.width="80%"}
+knitr::include_graphics(
+  "../figures/supplemental/MSFR_conceptual_figure-01.png"
+)
+```
+
+**Figure S2.** Conceptual diagram of density-dependent multi-species functional response (MSFR), relating the formulation of the density-dependent attack rate (Equations 1-2) to system behavior.
+
+
 \newpage
 
 ```{r, echo = FALSE}
 plots
 ```
 
-**Figure S2.** Trace plots of posterior samples of MSFR parameters. Colors refer to separate chains.
+**Figure S3.** Trace plots of posterior samples of MSFR parameters. Colors refer to separate chains.
 
+\newpage
 
 ```{r, echo=FALSE, out.width="80%"}
 knitr::include_graphics(
@@ -1058,7 +1139,7 @@ knitr::include_graphics(
 )
 ```
 
-**Figure S3.** Relationship between the proportion of each fish species in the predator's diet and estimated proportion of each fish species in the prey community. Error bars indicate the 95% credible interval for the abundance of available lamprey and salmon, $L^A_t$ and $S^A_t$, respectively.
+**Figure S4.** Relationship between the proportion of each fish species in the predator's diet and estimated proportion of each fish species in the prey community. Error bars indicate the 95% credible interval for the abundance of available lamprey and salmon, $L^A_t$ and $S^A_t$, respectively.
 
 ```{r, echo=FALSE, out.width="80%"}
 knitr::include_graphics(
@@ -1066,7 +1147,7 @@ knitr::include_graphics(
 )
 ```
 
-**Figure S4.** Decision utility as a function of a decision maker's action, or the lamprey production, $\alpha_L$, relative to Chinook salmon production, $\alpha_S$. Colors correspond to functional response uncertainty, and line types correspond to parasitism uncertainty. The point indicates the action that maximizes utility, $a*$.
+**Figure S5.** Decision utility as a function of a decision maker's action, or the lamprey production, $\alpha_L$, relative to Chinook salmon production, $\alpha_S$. Colors correspond to functional response uncertainty, and line types correspond to parasitism uncertainty. The point indicates the action that maximizes utility, $a*$.
 
 \newpage
 
@@ -1076,17 +1157,9 @@ knitr::include_graphics(
 )
 ```
 
-**Figure S5.** Relationship between functional response uncertainty and decision utility. **A.** Full posterior describing the relationship between a species' proportion in the prey community and proportion in the predator's diet for Pacific lamprey and Chinook salmon. Each line corresponds to the MSFR prediction for each posterior sample, and color corresponds to the value of each prediction when the species' proportion in the prey community equals 0.5. Dashed black line indicates the 1:1 line **B.** Decision utility calculated with each sample from the full MSFR posterior in panel A. The expected utility is calculated for each action, $a \in A$ (lamprey production parameter, $\alpha_L$, relative to Chinook salmon production parameter, $\alpha_S$). The asterisk indicates that the utility is calculated as an expectation over parasitism uncertainty (i.e., $E_P[U(a,f,p)]$). Points indicate the action that maximizes utility over parasitism uncertainty (i.e., $\text{max}_aE_P[U(a,f,p)]$). Colors indicate the corresponding posterior sample from panel A. The black line indicates the utility calculated as an expectation over both parasitism and functional response uncertainty (i.e., $E_{F,P}[U(a,f,p)]$). The black point indicates the action that maximizes utility over all uncertainty, or the bet-hedging strategy (i.e., $\text{max}_aE_{F,P}[U(a,f,p)]$).
+**Figure S6.** Relationship between functional response uncertainty and decision utility. **A.** Full posterior describing the relationship between a species' proportion in the prey community and proportion in the predator's diet for Pacific lamprey and Chinook salmon. Each line corresponds to the MSFR prediction for each posterior sample, and color corresponds to the value of each prediction when the species' proportion in the prey community equals 0.5. Dashed black line indicates the 1:1 line **B.** Decision utility calculated with each sample from the full MSFR posterior in panel A. The expected utility is calculated for each action, $a \in A$ (lamprey production parameter, $\alpha_L$, relative to Chinook salmon production parameter, $\alpha_S$). The asterisk indicates that the utility is calculated as an expectation over parasitism uncertainty (i.e., $E_P[U(a,f,p)]$). Points indicate the action that maximizes utility over parasitism uncertainty (i.e., $\text{max}_aE_P[U(a,f,p)]$). Colors indicate the corresponding posterior sample from panel A. The black line indicates the utility calculated as an expectation over both parasitism and functional response uncertainty (i.e., $E_{F,P}[U(a,f,p)]$). The black point indicates the action that maximizes utility over all uncertainty, or the bet-hedging strategy (i.e., $\text{max}_aE_{F,P}[U(a,f,p)]$).
 
 \newpage
-
-```{r, echo=FALSE, out.width="80%"}
-knitr::include_graphics(
-  "../figures/supplemental/MSFR_conceptual_figure-01.png"
-)
-```
-
-**Figure S6.** Conceptual diagram of density-dependent multi-species functional response (MSFR), relating the formulation of the density-dependent attack rate (Equations 1-2) to system behavior.
 
 ```{r, echo = FALSE, warning = FALSE, message = FALSE}
 ggplot(data = combined_data_final) +
@@ -1096,7 +1169,7 @@ ggplot(data = combined_data_final) +
 
 ```
 
-**Figure S7.** Histogram of the proportion of lamprey observed by visual day-time counts ($C_V / C_T$) is used to inform beta distribution parameters, $\alpha_D$ and $\beta_D$ (Equation 13).
+**Figure S7.** Histogram of the proportion of lamprey observed by visual day-time counts ($C_V / C_T$) is used to inform beta distribution parameters, $\alpha_D$ and $\beta_D$.
 
 
 ```{r, echo = FALSE, warning = FALSE, message = FALSE}
@@ -1132,6 +1205,7 @@ annual_summary <- combined_data %>%
 annual_chinook <- annual_summary[annual_summary$Species == "Chin", ]
 
 ```
+\newpage
 
 ```{r, echo = FALSE, warning = FALSE, message = FALSE, out.width="80%"}
 ggplot(data = annual_chinook) +

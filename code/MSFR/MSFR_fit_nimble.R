@@ -78,11 +78,9 @@ MSFR_model <- nimbleCode({
   
   for (t in 1:n_time) {
     
-    # Equation 8
     # get expected number of salmon passed
     S[t] ~ dpois(S_P[t])
     
-    # Equation 9
     # get expected number of salmon available
     S_P[t] ~ dbinom(size = round(S_A[t] - F_day[t, 2]), 
                     prob = salmon_PE)
@@ -91,7 +89,6 @@ MSFR_model <- nimbleCode({
   ########################
   # Lamprey prey abundance
   
-  # Equation 10
   # get expected number of available lamprey passed - exact years
   for (t in 1:n_exact) {
     L_exact[t] ~ dpois(L_P[t_exact[t]])
@@ -99,15 +96,15 @@ MSFR_model <- nimbleCode({
   
   # get expected number of available lamprey passed - inexact years
   for (t in 1:n_inexact) {
-    # Equation 11
+    
     L_inexact[t] ~ dbinom(size = L_P[t_inexact[t]], 
                           prob = p_D[t])
-    # Equation 12
+    
     p_D[t] ~ dbeta(alpha_D, beta_D)
   }
   
   for (t in 1:n_time) {
-    # Equation 14
+    
     # get expected number of lamprey available 
     L_P[t] ~ dbinom(size = round(L_A[t] - F_day[t, 1]), 
                     prob = lamprey_PE)
@@ -121,7 +118,6 @@ MSFR_model <- nimbleCode({
     
     for (i in 1:n_species) {
       
-      # Equations 15-16
       consumed[j, i] ~ dpois(F_exp[obs_ref[j], i]) 
       
     }
@@ -132,7 +128,6 @@ MSFR_model <- nimbleCode({
   
   for (t in 1:n_time) {
     
-    # Equations 17-18
     # expected number of prey consumed - function of available fish
     F_exp[t, 1:n_species] <- get_MSFR(L_A[t] / N_scale, 
                                       S_A[t] / N_scale, 
